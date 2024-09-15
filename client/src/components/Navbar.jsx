@@ -1,44 +1,19 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({ toggleSidebar }) => {
   return (
-    <div className="navbar bg-base-100 drop-shadow-md">
-      <div className="flex-1">
-        <a className="btn btn-ghost text-xl">VidFlow</a>
-      </div>
-      <div className="flex-none">
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div
+      className="flex justify-between items-center p-4 shadow-md bg-gray-100 dark:bg-gray-800"
+      style={{ height: "4rem" }}
+    >
+      <button
+        className="text-2xl p-2 focus:outline-none"
+        onClick={toggleSidebar}
+      >
+        &#9776;
+      </button>
+      <h1 className="text-xl font-semibold">VidFlow</h1>
+      <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700"></div>
     </div>
   );
 };
