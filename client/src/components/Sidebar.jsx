@@ -1,6 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
+const Sidebar = ({ isOpen }) => {
   return (
     <div
       className={`fixed top-0 left-0 w-64 bg-gray-200 dark:bg-gray-900 h-full transition-transform transform ${
@@ -8,47 +9,106 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       }`}
       style={{ top: "4rem" }} // Set the top position to the height of the topbar
     >
-      <div className="flex flex-col p-4 space-y-4 mt-8">
-        <button className="bg-gray-300 dark:bg-gray-700 p-2 rounded-lg">
-          Upload
-        </button>
-        <a
-          href="#"
-          className="hover:bg-gray-300 dark:hover:bg-gray-700 p-2 rounded-lg"
-        >
-          Home
-        </a>
-        <a
-          href="#"
-          className="hover:bg-gray-300 dark:hover:bg-gray-700 p-2 rounded-lg"
-        >
-          Your Channel
-        </a>
-        <a
-          href="#"
-          className="hover:bg-gray-300 dark:hover:bg-gray-700 p-2 rounded-lg"
-        >
-          History
-        </a>
-        <a
-          href="#"
-          className="hover:bg-gray-300 dark:hover:bg-gray-700 p-2 rounded-lg"
-        >
-          Playlists
-        </a>
-        <a
-          href="#"
-          className="hover:bg-gray-300 dark:hover:bg-gray-700 p-2 rounded-lg"
-        >
-          Liked videos
-        </a>
-        <a
-          href="#"
-          className="hover:bg-gray-300 dark:hover:bg-gray-700 p-2 rounded-lg"
-        >
-          Subscriptions
-        </a>
-      </div>
+      <ul className="flex flex-col p-4 space-y-4 mt-4">
+        <li>
+          <NavLink
+            to="/upload"
+            className={({ isActive }) =>
+              `p-2 rounded-lg block ${
+                isActive
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            Upload
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to=""
+            className={({ isActive }) =>
+              `p-2 rounded-lg block ${
+                isActive
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              `p-2 rounded-lg block ${
+                isActive
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/history"
+            className={({ isActive }) =>
+              `p-2 rounded-lg block ${
+                isActive
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            History
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/playlists"
+            className={({ isActive }) =>
+              `p-2 rounded-lg block ${
+                isActive
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            Playlists
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/liked-videos"
+            className={({ isActive }) =>
+              `p-2 rounded-lg block ${
+                isActive
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            Liked Videos
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/subscriptions"
+            className={({ isActive }) =>
+              `p-2 rounded-lg block ${
+                isActive
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            Subscriptions
+          </NavLink>
+        </li>
+      </ul>
     </div>
   );
 };
