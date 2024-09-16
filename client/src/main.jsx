@@ -10,6 +10,8 @@ import {
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home.jsx";
 import Subscriptions from "./pages/Subscriptions.jsx";
+import WatchHistory from "./pages/WatchHistory.jsx";
+import LikedVideos from "./pages/LikedVideos.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,9 +19,9 @@ const router = createBrowserRouter(
       <Route path="upload" element={<h1>upload</h1>} />
       <Route path="" element={<Home />} />
       <Route path="dashboard" element={<h1>dashboard</h1>} />
-      <Route path="history" element={<h1>history</h1>} />
+      <Route path="history" element={<WatchHistory />} />
       <Route path="playlists" element={<h1>playlists</h1>} />
-      <Route path="liked-videos" element={<h1>liked-videos</h1>} />
+      <Route path="liked-videos" element={<LikedVideos />} />
       <Route path="subscriptions" element={<Subscriptions />} />
     </Route>
   )
