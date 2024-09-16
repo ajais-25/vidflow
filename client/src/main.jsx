@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home.jsx";
+import Subscriptions from "./pages/Subscriptions.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,7 +20,7 @@ const router = createBrowserRouter(
       <Route path="history" element={<h1>history</h1>} />
       <Route path="playlists" element={<h1>playlists</h1>} />
       <Route path="liked-videos" element={<h1>liked-videos</h1>} />
-      <Route path="subscriptions" element={<h1>subsciprtions</h1>} />
+      <Route path="subscriptions" element={<Subscriptions />} />
     </Route>
   )
 );
