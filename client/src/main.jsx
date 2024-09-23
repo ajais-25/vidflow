@@ -12,6 +12,7 @@ import Home from "./pages/Home.jsx";
 import Subscriptions from "./pages/Subscriptions.jsx";
 import WatchHistory from "./pages/WatchHistory.jsx";
 import LikedVideos from "./pages/LikedVideos.jsx";
+import Playlists from "./pages/Playlists.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +21,7 @@ const router = createBrowserRouter(
       <Route path="" element={<Home />} />
       <Route path="dashboard" element={<h1>dashboard</h1>} />
       <Route path="history" element={<WatchHistory />} />
-      <Route path="playlists" element={<h1>playlists</h1>} />
+      <Route path="playlists" element={<Playlists />} />
       <Route path="liked-videos" element={<LikedVideos />} />
       <Route path="subscriptions" element={<Subscriptions />} />
     </Route>
