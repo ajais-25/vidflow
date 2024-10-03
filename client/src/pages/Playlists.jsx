@@ -30,7 +30,7 @@ const Playlists = () => {
         </p>
         <button
           onClick={handleCreatePlaylist}
-          className="h-full bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600"
+          className="h-full bg-primary-600 text-white px-4 py-2 rounded hover:bg-primary-800"
         >
           Create
         </button>

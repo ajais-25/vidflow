@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ toggleSidebar }) => {
   return (
@@ -7,13 +8,15 @@ const Navbar = ({ toggleSidebar }) => {
       style={{ height: "4rem" }}
     >
       <button
-        className="text-2xl p-2 focus:outline-none"
+        className="text-2xl p-2 flex justify-center items-center h-10 w-10 hover:bg-gray-300 dark:hover:bg-slate-700 rounded-full focus:outline-none"
         onClick={toggleSidebar}
       >
         &#9776;
       </button>
-      <h1 className="text-xl font-semibold">VidFlow</h1>
-      <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+      <Link to="/">
+        <h1 className="text-xl font-semibold cursor-pointer">VidFlow</h1>
+      </Link>
+      <div className="w-8 h-8 rounded-full cursor-pointer bg-gray-300 dark:bg-gray-700"></div>
     </div>
   );
 };
