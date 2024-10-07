@@ -14,6 +14,7 @@ import WatchHistory from "./pages/WatchHistory.jsx";
 import LikedVideos from "./pages/LikedVideos.jsx";
 import Playlists from "./pages/Playlists.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import PlaylistIndividual from "./pages/PlaylistIndividual.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="dashboard" element={<h1>dashboard</h1>} />
       <Route path="history" element={<WatchHistory />} />
       <Route path="playlists" element={<Playlists />} />
+      <Route path="playlists/:id" element={<PlaylistIndividual />} />
       <Route path="liked-videos" element={<LikedVideos />} />
       <Route path="subscriptions" element={<Subscriptions />} />
       <Route path="*" element={<NotFound />} />
