@@ -12,7 +12,7 @@ const Navbar = ({ toggleSidebar }) => {
       style={{ height: "4rem" }}
     >
       <button
-        className="text-2xl p-2 flex justify-center items-center h-10 w-10 hover:bg-gray-300 dark:hover:bg-slate-700 rounded-full focus:outline-none"
+        className="text-2xl p-2 flex justify-center items-center h-10 w-10 active:bg-gray-300 md:hover:bg-gray-300 dark:md:hover:bg-slate-700 dark:active:bg-slate-700 rounded-full focus:outline-none"
         onClick={toggleSidebar}
       >
         &#9776;

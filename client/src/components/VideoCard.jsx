@@ -4,7 +4,7 @@ import React from "react";
 const VideoCard = () => {
   return (
     <div className="p-4 w-full">
-      <div className="bg-white hover:scale-105 transition-all duration-300 dark:bg-gray-800 rounded-lg shadow-md p-4 cursor-pointer">
+      <div className="bg-white md:hover:scale-105 active:scale-95 transition-all duration-300 dark:bg-gray-800 rounded-lg shadow-md p-4 cursor-pointer">
         <div className="h-40 bg-gray-300 dark:bg-gray-700 rounded-md mb-4 relative">
           <div className="absolute bottom-2 right-2 bg-black text-white text-xs px-1 py-0.5 rounded">
             12:34
