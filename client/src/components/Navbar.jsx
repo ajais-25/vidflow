@@ -8,7 +8,7 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <div
-      className="flex justify-between items-center z-10 p-4 shadow-md fixed top-0 left-0 right-0 bg-gray-100 dark:bg-gray-800"
+      className="flex justify-between items-center z-50 p-4 shadow-md fixed top-0 left-0 right-0 bg-gray-100 dark:bg-gray-800"
       style={{ height: "4rem" }}
     >
       <button

@@ -1,6 +1,6 @@
 // src/pages/PlaylistPage.jsx
 import React, { useState } from "react";
-import Playlist from "../components/Playlist";
+import Playlist from "../components/playlist/Playlist";
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([
