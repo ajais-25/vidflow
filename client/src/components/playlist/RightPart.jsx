@@ -30,7 +30,7 @@ const videoData = [
 
 const RightPart = () => {
   return (
-    <div className="flex-1 p-2 m-4 lg:ml-96 rounded-lg bg-green-300">
+    <div className="flex-1 p-2 m-4 lg:ml-96 rounded-lg">
       {videoData.map((video, index) => (
         <PlaylistVideo key={index} video={video} />
       ))}

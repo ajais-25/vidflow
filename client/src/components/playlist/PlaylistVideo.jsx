@@ -8,7 +8,7 @@ const PlaylistVideo = ({ video }) => {
           12:34
         </div>
       </div>
-      <div className="self-start bg-pink-500 w-full">
+      <div className="self-start w-full">
         <h2 className="font-semibold text-lg">{video.title}</h2>
         <p className="text-sm mt-3 text-gray-500">Akshat Jaiswal</p>
         <p className="text-sm mt-1 text-gray-500">
