@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const Sidebar = ({ isOpen }) => {
   return (
     <div
-      className={`fixed top-0 left-0 w-64 bg-gray-200 z-10 dark:bg-gray-900 h-full transition-transform transform ${
+      className={`fixed top-0 left-0 w-64 bg-gray-200 z-50 dark:bg-gray-900 h-full transition-transform transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
       style={{ top: "4rem" }} // Set the top position to the height of the topbar
