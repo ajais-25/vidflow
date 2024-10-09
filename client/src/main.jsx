@@ -15,13 +15,14 @@ import LikedVideos from "./pages/LikedVideos.jsx";
 import Playlists from "./pages/Playlists.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import PlaylistIndividual from "./pages/PlaylistIndividual.jsx";
+import ChannelDashboard from "./pages/ChannelDashboard.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path="upload" element={<h1>upload</h1>} />
       <Route path="" element={<Home />} />
-      <Route path="dashboard" element={<h1>dashboard</h1>} />
+      <Route path="dashboard" element={<ChannelDashboard />} />
       <Route path="history" element={<WatchHistory />} />
       <Route path="playlists" element={<Playlists />} />
       <Route path="playlists/:id" element={<PlaylistIndividual />} />

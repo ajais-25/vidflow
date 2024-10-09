@@ -1,7 +1,7 @@
 // src/components/VideoCard.jsx
 import React from "react";
 
-const VideoCard = () => {
+const VideoCard = ({ isChannelDashboard = false }) => {
   return (
     <div className="p-4 w-full">
       <div className="bg-white md:hover:scale-105 active:scale-95 transition-all duration-300 dark:bg-gray-800 rounded-lg shadow-md p-4 cursor-pointer">
@@ -11,7 +11,9 @@ const VideoCard = () => {
           </div>
         </div>
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gray-400 dark:bg-gray-600 rounded-full"></div>
+          {!isChannelDashboard && (
+            <div className="w-10 h-10 bg-gray-400 dark:bg-gray-600 rounded-full"></div>
+          )}
           <div>
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
               This is a video
