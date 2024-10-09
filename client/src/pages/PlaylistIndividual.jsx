@@ -1,6 +1,6 @@
 import React from "react";
-import LeftPart from "../components/playlist/LeftPart";
-import RightPart from "../components/playlist/RightPart";
+import LeftPart from "../components/Playlist/LeftPart";
+import RightPart from "../components/Playlist/RightPart";
 
 const PlaylistIndividual = () => {
   return (
