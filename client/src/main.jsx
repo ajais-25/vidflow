@@ -16,11 +16,12 @@ import Playlists from "./pages/Playlists.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import PlaylistIndividual from "./pages/PlaylistIndividual.jsx";
 import ChannelDashboard from "./pages/ChannelDashboard.jsx";
+import Upload from "./pages/Upload.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="upload" element={<h1>upload</h1>} />
+      <Route path="upload" element={<Upload />} />
       <Route path="" element={<Home />} />
       <Route path="dashboard" element={<ChannelDashboard />} />
       <Route path="history" element={<WatchHistory />} />
