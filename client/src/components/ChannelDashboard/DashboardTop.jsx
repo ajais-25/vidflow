@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const DashboardTop = () => {
   const [isOwner, setIsOwner] = useState(true);
@@ -14,13 +15,6 @@ const DashboardTop = () => {
             <p>100K subscribers · 100 videos</p>
           </div>
         </div>
-        {/* <button
-          className={`${
-            isOwner ? "bg-blue-500" : "bg-red-500"
-          } text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg`}
-        >
-          {isOwner ? "Upload" : "Subscribe"}
-        </button> */}
         {!isOwner && !isSubscribed && (
           <button
             className="bg-red-500 text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg"
@@ -38,9 +32,11 @@ const DashboardTop = () => {
           </button>
         )}
         {isOwner && (
-          <button className="bg-blue-500 text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg">
-            Upload
-          </button>
+          <Link to="/upload">
+            <button className="bg-blue-500 text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg">
+              Upload
+            </button>
+          </Link>
         )}
       </div>
     </div>

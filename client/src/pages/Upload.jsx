@@ -34,7 +34,7 @@ const Upload = () => {
             </div>
 
             {/* Thumbnail & Video */}
-            <div className="flex justify-between">
+            <div className="flex flex-col gap-6 justify-center sm:flex-row sm:justify-between">
               <div className="flex flex-col justify-center">
                 <label className="block text-sm font-medium mb-1">Video*</label>
                 <label className="w-44 h-32 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 flex justify-center items-center cursor-pointer rounded-md border dark:border-gray-600">
