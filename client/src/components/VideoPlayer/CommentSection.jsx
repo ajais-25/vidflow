@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import like from "../../assets/images/like.png";
-import liked from "../../assets/images/liked.png";
 
 const CommentSection = () => {
   const [comments, setComments] = useState([
