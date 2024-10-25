@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound.jsx";
 import PlaylistIndividual from "./pages/PlaylistIndividual.jsx";
 import ChannelDashboard from "./pages/ChannelDashboard.jsx";
 import Upload from "./pages/Upload.jsx";
+import VideoPage from "./pages/VideoPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,8 @@ const router = createBrowserRouter(
       <Route path="playlists/:id" element={<PlaylistIndividual />} />
       <Route path="liked-videos" element={<LikedVideos />} />
       <Route path="subscriptions" element={<Subscriptions />} />
+      {/* Video */}
+      <Route path="video/:id" element={<VideoPage />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )

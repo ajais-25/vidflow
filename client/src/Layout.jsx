@@ -11,7 +11,7 @@ const Layout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
+    <div className="min-h-screen pt-2 bg-white dark:bg-gray-900 text-black dark:text-white">
       <Navbar toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={isSidebarOpen} />
       <Outlet />
