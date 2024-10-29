@@ -4,14 +4,6 @@ import bcrypt from "bcrypt";
 
 const userSchema = new Schema(
     {
-        username: {
-            type: String,
-            required: true,
-            unique: true,
-            lowercase: true,
-            trim: true,
-            index: true,
-        },
         email: {
             type: String,
             required: true,
@@ -28,9 +20,6 @@ const userSchema = new Schema(
         avatar: {
             type: String, // cloudinary URL
             required: true,
-        },
-        coverImage: {
-            type: String, // cloudinary URL
         },
         watchHistory: [
             {
@@ -63,7 +52,6 @@ userSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id,
-            username: this.username,
             email: this.email,
             fullName: this.fullName,
         },
