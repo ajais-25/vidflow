@@ -1,4 +1,3 @@
-import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.model.js";
 import {
     deleteImageFromCloudinary,
@@ -26,7 +25,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
     }
 };
 
-const registerUser = asyncHandler(async (req, res) => {
+const registerUser = async (req, res) => {
     const { fullName, email, username, password } = req.body;
     console.log(fullName, email, username);
 
@@ -77,9 +76,9 @@ const registerUser = asyncHandler(async (req, res) => {
     return res
         .status(201)
         .json(new ApiResponse(200, createdUser, "User created successfully"));
-});
+};
 
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -129,9 +128,9 @@ const loginUser = asyncHandler(async (req, res) => {
                 "User logged In Successfully"
             )
         );
-});
+};
 
-const logoutUser = asyncHandler(async (req, res) => {
+const logoutUser = async (req, res) => {
     await User.findByIdAndUpdate(
         req.user._id,
         {
@@ -150,9 +149,9 @@ const logoutUser = asyncHandler(async (req, res) => {
         .clearCookie("accessToken", options)
         .clearCookie("refreshToken", options)
         .json(new ApiResponse(200, {}, "User logged out successfully"));
-});
+};
 
-const refreshAccessToken = asyncHandler(async (req, res) => {
+const refreshAccessToken = async (req, res) => {
     const incommingRefreshToken =
         req.cookies.refreshToken || req.body.refreshToken;
 
@@ -203,9 +202,9 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     } catch (error) {
         return res.status(401).json({ message: "Invalid refresh token" });
     }
-});
+};
 
-const changeCurrentPassword = asyncHandler(async (req, res) => {
+const changeCurrentPassword = async (req, res) => {
     const { oldPassword, newPassword } = req.body;
 
     const user = await User.findById(req.user?._id);
@@ -224,15 +223,15 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(new ApiResponse(200, {}, "Password updated successfully"));
-});
+};
 
-const getCurrentUser = asyncHandler(async (req, res) => {
+const getCurrentUser = async (req, res) => {
     return res
         .status(200)
         .json(new ApiResponse(200, req.user, "User fetched successfully"));
-});
+};
 
-const updateAccountDetails = asyncHandler(async (req, res) => {
+const updateAccountDetails = async (req, res) => {
     const { email, username } = req.body;
 
     if (!email || !username) {
@@ -252,9 +251,9 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(new ApiResponse(200, user, "User updated successfully"));
-});
+};
 
-const updateUserAvatar = asyncHandler(async (req, res) => {
+const updateUserAvatar = async (req, res) => {
     let avatarLocalPath;
 
     if (req.file) {
@@ -293,9 +292,9 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(new ApiResponse(200, {}, "Avatar updated successfully"));
-});
+};
 
-const getUserChannelProfile = asyncHandler(async (req, res) => {
+const getUserChannelProfile = async (req, res) => {
     const { userId } = req.params;
 
     if (!userId?.trim()) {
@@ -363,9 +362,9 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(new ApiResponse(200, channel[0], "Channel fetched successfully"));
-});
+};
 
-const getWatchHistory = asyncHandler(async (req, res) => {
+const getWatchHistory = async (req, res) => {
     const user = await User.aggregate([
         {
             $match: {
@@ -417,7 +416,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
                 "Watch history fetched successfully"
             )
         );
-});
+};
 
 export {
     registerUser,
