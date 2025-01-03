@@ -8,7 +8,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-const Layout = lazy(() => import("./Layout.jsx"));
+import Layout from "./Layout.jsx";
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Subscriptions = lazy(() => import("./pages/Subscriptions.jsx"));
 const WatchHistory = lazy(() => import("./pages/WatchHistory.jsx"));
@@ -20,22 +20,17 @@ const Upload = lazy(() => import("./pages/Upload.jsx"));
 const VideoPage = lazy(() => import("./pages/VideoPage.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
 const SignUp = lazy(() => import("./pages/SignUp.jsx"));
+import Loading from "./components/Loading.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route
-        path="/"
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Layout />
-          </Suspense>
-        }
-      >
+      <Route path="/" element={<Layout />}>
+        {/* <Route path="load" element={<Loading />} /> */}
         <Route
           path="login"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <Login />
             </Suspense>
           }
@@ -43,7 +38,7 @@ const router = createBrowserRouter(
         <Route
           path="register"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <SignUp />
             </Suspense>
           }
@@ -51,7 +46,7 @@ const router = createBrowserRouter(
         <Route
           path="upload"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <Upload />
             </Suspense>
           }
@@ -59,7 +54,7 @@ const router = createBrowserRouter(
         <Route
           path=""
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <Home />
             </Suspense>
           }
@@ -67,7 +62,7 @@ const router = createBrowserRouter(
         <Route
           path="dashboard"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <ChannelDashboard />
             </Suspense>
           }
@@ -75,7 +70,7 @@ const router = createBrowserRouter(
         <Route
           path="history"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <WatchHistory />
             </Suspense>
           }
@@ -83,7 +78,7 @@ const router = createBrowserRouter(
         <Route
           path="subscriptions"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <Subscriptions />
             </Suspense>
           }
@@ -92,7 +87,7 @@ const router = createBrowserRouter(
         <Route
           path="playlists"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <Playlists />
             </Suspense>
           }
@@ -100,7 +95,7 @@ const router = createBrowserRouter(
         <Route
           path="playlists/:id"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <PlaylistIndividual />
             </Suspense>
           }
@@ -109,7 +104,7 @@ const router = createBrowserRouter(
         <Route
           path="video/:id"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <VideoPage />
             </Suspense>
           }
@@ -117,7 +112,7 @@ const router = createBrowserRouter(
         <Route
           path="*"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
               <NotFound />
             </Suspense>
           }

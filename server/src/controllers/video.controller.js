@@ -8,22 +8,16 @@ import {
 } from "../utils/cloudinary.js";
 
 const getAllVideos = async (req, res) => {
-    const { page = 1, limit = 10, userId } = req.query;
-
-    if (!userId?.trim()) {
-        return res.status(500).json({ message: "user id is missing" });
-    }
-
-    if (!isValidObjectId(userId)) {
-        return res.status(500).json({ message: "Not a valid user id" });
-    }
+    console.log("Get all videos");
+    const { page = 1, limit = 10 } = req.query;
 
     const skip = (page - 1) * limit;
 
     const videos = await Video.find({ status: "public" })
         .skip(skip)
         .limit(limit)
-        .sort({ createdAt: -1 });
+        .sort({ createdAt: -1 })
+        .populate("owner");
 
     if (!videos) {
         return res

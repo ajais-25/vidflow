@@ -82,6 +82,8 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
+    console.log(email, password);
+
     if (!email || !password) {
         return res
             .status(400)
@@ -91,7 +93,7 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-        return res.status(404).json({ message: "User does not exists" });
+        return res.status(400).json({ message: "User does not exists" });
     }
 
     const isPasswordValid = await user.isPasswordCorrect(password);
