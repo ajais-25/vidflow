@@ -15,7 +15,12 @@ const userSchema = new Schema(
             type: String,
             required: true,
             trim: true,
-            index: true,
+        },
+        username: {
+            type: String,
+            required: true,
+            unique: true,
+            trim: true,
         },
         avatar: {
             type: String, // cloudinary URL

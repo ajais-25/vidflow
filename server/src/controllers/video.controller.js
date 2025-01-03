@@ -39,8 +39,8 @@ const getAllVideos = async (req, res) => {
 const publishAVideo = async (req, res) => {
     const { title, description, status } = req.body;
 
-    if (!title || !description || status) {
-        return res.status(500).json({ message: "all fields are required" });
+    if (!title || !description || !status) {
+        return res.status(500).json({ message: "All fields are required" });
     }
 
     let videoFileLocalPath;

@@ -12,7 +12,7 @@ const DashboardTop = () => {
           <div className="w-16 h-16 rounded-full bg-gray-300 dark:bg-gray-700" />
           <div>
             <h1 className="text-xl font-bold">Akshat Jaiswal</h1>
-            <p>100K subscribers · 100 videos</p>
+            <p>100K subscribers · 100 subscribed</p>
           </div>
         </div>
         {!isOwner && !isSubscribed && (

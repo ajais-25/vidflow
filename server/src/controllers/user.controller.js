@@ -59,6 +59,7 @@ const registerUser = async (req, res) => {
         fullName,
         avatar: avatar.url,
         email,
+        username,
         password,
     });
 
@@ -295,9 +296,9 @@ const updateUserAvatar = async (req, res) => {
 };
 
 const getUserChannelProfile = async (req, res) => {
-    const { userId } = req.params;
+    const { username } = req.params;
 
-    if (!userId?.trim()) {
+    if (!username?.trim()) {
         return res.status(400).json({ message: "User id is missing" });
     }
 

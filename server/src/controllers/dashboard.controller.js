@@ -1,31 +1,6 @@
 import { Video } from "../models/video.model.js";
 import { Playlist } from "../models/playlist.model.js";
-import { Subscription } from "../models/subscription.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-
-const getChannelSubscribers = async (req, res) => {
-    const currUserId = req.user._id;
-
-    const subscribers = await Subscription.find({ channel: currUserId });
-
-    if (!subscribers) {
-        return res.status(500).json({
-            message: "Something went wrong while fetching subscribers",
-        });
-    }
-
-    const totalSubscribers = subscribers.length;
-
-    return res
-        .status(200)
-        .json(
-            new ApiResponse(
-                200,
-                totalSubscribers,
-                "Subscribers fetched successfully"
-            )
-        );
-};
 
 const getChannelVideos = async (req, res) => {
     const videos = await Video.find({ owner: req.user._id });
@@ -57,4 +32,4 @@ const getChannelPlaylists = async (req, res) => {
         );
 };
 
-export { getChannelSubscribers, getChannelVideos, getChannelPlaylists };
+export { getChannelVideos, getChannelPlaylists };

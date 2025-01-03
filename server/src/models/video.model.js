@@ -29,6 +29,7 @@ const videoSchema = new Schema(
         status: {
             type: String,
             enum: ["public", "private"],
+            required: true,
         },
         owner: {
             type: Schema.Types.ObjectId,
