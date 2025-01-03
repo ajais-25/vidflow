@@ -11,7 +11,6 @@ import Layout from "./Layout.jsx";
 import Home from "./pages/Home.jsx";
 import Subscriptions from "./pages/Subscriptions.jsx";
 import WatchHistory from "./pages/WatchHistory.jsx";
-import LikedVideos from "./pages/LikedVideos.jsx";
 import Playlists from "./pages/Playlists.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import PlaylistIndividual from "./pages/PlaylistIndividual.jsx";
@@ -32,7 +31,6 @@ const router = createBrowserRouter(
       <Route path="history" element={<WatchHistory />} />
       <Route path="playlists" element={<Playlists />} />
       <Route path="playlists/:id" element={<PlaylistIndividual />} />
-      <Route path="liked-videos" element={<LikedVideos />} />
       <Route path="subscriptions" element={<Subscriptions />} />
       {/* Video */}
       <Route path="video/:id" element={<VideoPage />} />
