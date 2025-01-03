@@ -13,11 +13,52 @@ const getAllVideos = async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    const videos = await Video.find({ status: "public" })
-        .skip(skip)
-        .limit(limit)
-        .sort({ createdAt: -1 })
-        .populate("owner");
+    // const videos = await Video.find({ status: "public" })
+    //     .skip(skip)
+    //     .limit(limit)
+    //     .sort({ createdAt: -1 })
+    //     .populate("owner");
+
+    const videos = await Video.aggregate([
+        {
+            $match: {
+                status: "public",
+            },
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+            },
+        },
+        {
+            $unwind: "$owner",
+        },
+        {
+            $project: {
+                "owner.password": 0,
+                "owner.email": 0,
+                "owner.createdAt": 0,
+                "owner.updatedAt": 0,
+                "owner.__v": 0,
+                "owner.refreshToken": 0,
+                "owner.watchHistory": 0,
+            },
+        },
+        {
+            $skip: skip,
+        },
+        {
+            $limit: limit,
+        },
+        {
+            $sort: {
+                createdAt: -1,
+            },
+        },
+    ]);
 
     if (!videos) {
         return res
