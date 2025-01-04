@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import avatar_black from "../assets/images/avatar_black.png";
 import avatar_white from "../assets/images/avatar_white.png";
+import axios from "axios";
+import { API } from "../api";
+
+const getCurrentUser = async () => {
+  try {
+    const response = await axios(`${API}/users/current-user`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching current user: ", error);
+  }
+};
 
 const Navbar = ({ toggleSidebar }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    getCurrentUser().then((user) => setCurrentUser(user));
+  }, []);
+
+  const joinedDate =
+    (currentUser && new Date(currentUser.createdAt).toDateString()) || "";
+  const userAvatar = currentUser && currentUser.avatar;
 
   const toggleTheme = () => {
     document.documentElement.classList.toggle("dark");
@@ -48,7 +68,7 @@ const Navbar = ({ toggleSidebar }) => {
           >
             <img
               className="h-full w-full rounded-full"
-              src={isDarkTheme ? avatar_white : avatar_black}
+              src={userAvatar || (isDarkTheme ? avatar_white : avatar_black)}
               alt="avatar"
             />
           </div>
@@ -57,7 +77,7 @@ const Navbar = ({ toggleSidebar }) => {
           {isProfileOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
               <p className="text-sm text-gray-700 dark:text-gray-200">
-                Joined: Jan 2023
+                Joined: {joinedDate}
               </p>
               <button
                 className="mt-4 w-full text-sm font-semibold text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500"

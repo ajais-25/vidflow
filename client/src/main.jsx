@@ -25,24 +25,23 @@ import Loading from "./components/Loading.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
+      <Route
+        path="login"
+        element={
+          <Suspense fallback={<Loading />}>
+            <Login />
+          </Suspense>
+        }
+      />
+      <Route
+        path="register"
+        element={
+          <Suspense fallback={<Loading />}>
+            <SignUp />
+          </Suspense>
+        }
+      />
       <Route path="/" element={<Layout />}>
-        {/* <Route path="load" element={<Loading />} /> */}
-        <Route
-          path="login"
-          element={
-            <Suspense fallback={<Loading />}>
-              <Login />
-            </Suspense>
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <Suspense fallback={<Loading />}>
-              <SignUp />
-            </Suspense>
-          }
-        />
         <Route
           path="upload"
           element={

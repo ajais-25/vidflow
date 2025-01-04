@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function getTimeDifference(updatedTime) {
   const currentTime = new Date();
@@ -29,7 +30,7 @@ function getTimeDifference(updatedTime) {
 }
 
 const VideoCard = ({ isChannelDashboard = false, video }) => {
-  const duration = (video?.duration).toFixed();
+  const duration = video?.duration?.toFixed() || 0;
   const seconds = duration % 60;
   const minutes = (duration - seconds) / 60;
   const hours = minutes / 60;
@@ -54,21 +55,27 @@ const VideoCard = ({ isChannelDashboard = false, video }) => {
         </div>
         <div className="flex items-center space-x-3">
           {!isChannelDashboard && (
-            <div className="w-10 h-10 bg-gray-400 dark:bg-gray-600 rounded-full">
+            <Link
+              to={`/c/${video?.owner.username}`}
+              className="w-10 h-10 bg-gray-400 dark:bg-gray-600 rounded-full"
+            >
               <img
                 src={video?.owner.avatar}
                 alt="Avatar"
                 className="w-10 h-10 rounded-full object-cover"
               />
-            </div>
+            </Link>
           )}
           <div>
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
               {video?.title || "Video Title"}
             </h2>
-            <p className="text-gray-500 dark:text-gray-400">
+            <Link
+              to={`/c/${video?.owner.username}`}
+              className="text-gray-500 dark:text-gray-400 hover:underline"
+            >
               {video?.owner.fullName}
-            </p>
+            </Link>
             <p className="text-gray-500 dark:text-gray-400">
               {video?.views} views • {timeDifference}
             </p>

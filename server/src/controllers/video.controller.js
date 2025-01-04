@@ -8,16 +8,9 @@ import {
 } from "../utils/cloudinary.js";
 
 const getAllVideos = async (req, res) => {
-    console.log("Get all videos");
     const { page = 1, limit = 10 } = req.query;
 
     const skip = (page - 1) * limit;
-
-    // const videos = await Video.find({ status: "public" })
-    //     .skip(skip)
-    //     .limit(limit)
-    //     .sort({ createdAt: -1 })
-    //     .populate("owner");
 
     const videos = await Video.aggregate([
         {
