@@ -64,6 +64,64 @@ const getAllVideos = async (req, res) => {
         .json(new ApiResponse(200, videos, "Videos fetched Successfully"));
 };
 
+const getVideosByUsername = async (req, res) => {
+    const { username } = req.params;
+
+    if (!username?.trim()) {
+        return res.status(500).json({ message: "username is missing" });
+    }
+
+    const videos = await Video.aggregate([
+        {
+            $match: {
+                status: "public",
+            },
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+            },
+        },
+        {
+            $unwind: "$owner",
+        },
+        {
+            $match: {
+                "owner.username": username,
+            },
+        },
+        {
+            $project: {
+                "owner.password": 0,
+                "owner.email": 0,
+                "owner.createdAt": 0,
+                "owner.updatedAt": 0,
+                "owner.__v": 0,
+                "owner.refreshToken": 0,
+                "owner.watchHistory": 0,
+            },
+        },
+        {
+            $sort: {
+                createdAt: -1,
+            },
+        },
+    ]);
+
+    if (!videos) {
+        return res
+            .status(500)
+            .json({ message: "Something went wrong while fetching videos" });
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, videos, "Videos fetched Successfully"));
+};
+
 const publishAVideo = async (req, res) => {
     const { title, description, status } = req.body;
 
@@ -233,4 +291,11 @@ const deleteVideo = async (req, res) => {
         .json(new ApiResponse(200, {}, "Video deleted successfully"));
 };
 
-export { getAllVideos, publishAVideo, getVideoById, updateVideo, deleteVideo };
+export {
+    getAllVideos,
+    getVideosByUsername,
+    publishAVideo,
+    getVideoById,
+    updateVideo,
+    deleteVideo,
+};

@@ -59,7 +59,7 @@ const router = createBrowserRouter(
           }
         />
         <Route
-          path="dashboard"
+          path="c/:username"
           element={
             <Suspense fallback={<Loading />}>
               <ChannelDashboard />

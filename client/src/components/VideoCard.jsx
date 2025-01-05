@@ -48,6 +48,7 @@ const VideoCard = ({ isChannelDashboard = false, video }) => {
             src={video?.thumbnail}
             alt="Thumbnail"
             className="w-full h-full object-cover rounded-md"
+            loading="lazy"
           />
           <div className="absolute bottom-2 right-2 bg-black text-white text-xs px-1 py-0.5 rounded">
             {formattedDuration}
@@ -70,12 +71,18 @@ const VideoCard = ({ isChannelDashboard = false, video }) => {
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
               {video?.title || "Video Title"}
             </h2>
-            <Link
-              to={`/c/${video?.owner.username}`}
-              className="text-gray-500 dark:text-gray-400 hover:underline"
-            >
-              {video?.owner.fullName}
-            </Link>
+            {!isChannelDashboard ? (
+              <Link
+                to={`/c/${video?.owner.username}`}
+                className="text-gray-500 dark:text-gray-400 hover:underline"
+              >
+                {video?.owner.fullName}
+              </Link>
+            ) : (
+              <p className="text-gray-500 dark:text-gray-400">
+                {video?.owner.fullName}
+              </p>
+            )}
             <p className="text-gray-500 dark:text-gray-400">
               {video?.views} views • {timeDifference}
             </p>

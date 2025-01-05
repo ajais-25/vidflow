@@ -354,9 +354,7 @@ const getUserChannelProfile = async (req, res) => {
         },
     ]);
 
-    console.log(channel);
-
-    if (!channel?.length) {
+    if (channel.length === 0) {
         return res.status(404).json({ message: "Channel not found" });
     }
 

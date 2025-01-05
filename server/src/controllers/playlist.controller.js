@@ -15,7 +15,7 @@ const createPlaylist = async (req, res) => {
         name,
         description,
         videos: [],
-        owner: req.user._id,
+        owner: req.user?.username,
     });
 
     const createdPlaylist = await Playlist.findById(playlist._id);
@@ -41,18 +41,10 @@ const getUserPlaylists = async (req, res) => {
     const { userId } = req.params;
 
     if (!userId?.trim()) {
-        return res.status(400).json({ message: "user id is missing" });
-    }
-
-    if (!isValidObjectId(userId)) {
-        return res.status(400).json({ message: "Not a valid user id" });
+        return res.status(400).json({ message: "user Id is missing" });
     }
 
     const userPlaylists = await Playlist.find({ owner: userId });
-
-    if (!userPlaylists) {
-        return res.status(500).json({ message: "No playlists found" });
-    }
 
     return res
         .status(200)

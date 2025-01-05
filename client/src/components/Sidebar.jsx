@@ -40,20 +40,6 @@ const Sidebar = ({ isOpen }) => {
         </li>
         <li>
           <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              `p-2 rounded-lg block ${
-                isActive
-                  ? "bg-gray-400 dark:bg-gray-600"
-                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
-              }`
-            }
-          >
-            Dashboard
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/history"
             className={({ isActive }) =>
               `p-2 rounded-lg block ${
