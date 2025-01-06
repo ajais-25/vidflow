@@ -13,6 +13,12 @@ const toggleSubscription = async (req, res) => {
         return res.status(400).json({ message: "Not a valid Channel id" });
     }
 
+    if (req.user._id === channelId) {
+        return res
+            .status(400)
+            .json({ message: "You can't subscribe to your own channel" });
+    }
+
     const isSubscribed = await Subscription.findOne({
         channel: channelId,
         subscriber: req.user._id,
@@ -81,17 +87,38 @@ const getUserChannelSubscribers = async (req, res) => {
 
 // controller to return channel list to which user has subscribed
 const getSubscribedChannels = async (req, res) => {
-    const { subscriberId } = req.params;
+    const subscriberId = req?.user._id;
 
-    if (!subscriberId?.trim()) {
+    if (!subscriberId) {
         return res.status(400).json({ message: "subscriber id is required" });
     }
 
-    if (!isValidObjectId(subscriberId)) {
-        return res.status(400).json({ message: "Not a valid Subscriber id" });
-    }
-
-    const channelList = await Subscription.find({ subscriber: subscriberId });
+    const channelList = await Subscription.aggregate([
+        {
+            $match: {
+                subscriber: subscriberId,
+            },
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "channel",
+                foreignField: "_id",
+                as: "channel",
+            },
+        },
+        {
+            $unwind: "$channel",
+        },
+        {
+            $project: {
+                _id: "$channel._id",
+                fullName: "$channel.fullName",
+                username: "$channel.username",
+                avatar: "$channel.avatar",
+            },
+        },
+    ]);
 
     return res
         .status(200)

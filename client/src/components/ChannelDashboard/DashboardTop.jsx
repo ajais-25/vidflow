@@ -25,7 +25,6 @@ const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
       const response = await axios.post(
         `${API}/subscriptions/c/${channelProfile?._id}`
       );
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
