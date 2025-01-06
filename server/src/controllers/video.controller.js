@@ -291,6 +291,33 @@ const deleteVideo = async (req, res) => {
         .json(new ApiResponse(200, {}, "Video deleted successfully"));
 };
 
+const viewVideo = async (req, res) => {
+    const { videoId } = req.params;
+
+    if (!videoId?.trim()) {
+        return res.status(400).json({ message: "video id is missing" });
+    }
+
+    if (!isValidObjectId(videoId)) {
+        return res.status(400).json({ message: "Not a valid video id" });
+    }
+
+    const video = await Video.findById(videoId);
+
+    if (!video) {
+        return res.status(400).json({ message: "Video not found" });
+    }
+
+    video.views += 1;
+    await video.save({ validateBeforeSave: false });
+    req.user.watchHistory.push(video._id);
+    await req.user.save({ validateBeforeSave: false });
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, video, "Video viewed successfully"));
+};
+
 export {
     getAllVideos,
     getVideosByUsername,
@@ -298,4 +325,5 @@ export {
     getVideoById,
     updateVideo,
     deleteVideo,
+    viewVideo,
 };

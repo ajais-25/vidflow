@@ -406,6 +406,9 @@ const getWatchHistory = async (req, res) => {
         },
     ]);
 
+    // reverse the watch history to show the latest watched video first
+    user[0].watchHistory = user[0].watchHistory.reverse();
+
     return res
         .status(200)
         .json(
