@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import VideoCard from "../components/VideoCard";
 import axios from "axios";
 import { API } from "../api";
+import VideoLoader from "../components/Loader/VideoLoader";
 
 const Home = () => {
   const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getAllVideos = async () => {
@@ -12,8 +14,10 @@ const Home = () => {
         const response = await axios.get(`${API}/videos`);
         // console.log(response.data.data);
         setVideos(response.data.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching videos: ", error);
+        setLoading(false);
       }
     };
 
@@ -24,6 +28,7 @@ const Home = () => {
     <div className="container mx-auto py-24 px-10">
       {/* Responsive grid layout */}
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {loading && <VideoLoader />}
         {
           // Display all the videos
           videos &&

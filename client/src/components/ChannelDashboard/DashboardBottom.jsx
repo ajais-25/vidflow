@@ -23,12 +23,11 @@ const DashboardBottom = ({ tabSelected, channelVideos, channelPlaylists }) => {
         </>
       ) : (
         <>
-          <Playlist title="Playlist 1" />
-          <Playlist title="Playlist 2" />
-          <Playlist title="Playlist 3" />
-          <Playlist title="Playlist 4" />
-          <Playlist title="Playlist 5" />
-          <Playlist title="Playlist 6" />
+          {channelPlaylists && channelPlaylists.length === 0 && (
+            <div className="col-span-4 text-center text-lg text-gray-500 dark:text-gray-400">
+              No playlists found
+            </div>
+          )}
         </>
       )}
     </div>

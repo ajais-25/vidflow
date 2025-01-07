@@ -2,26 +2,25 @@ import React, { useEffect, useState } from "react";
 import Playlist from "../components/playlist/Playlist";
 import axios from "axios";
 import { API } from "../api";
+import PlaylistLoader from "../components/Loader/PlaylistLoader";
 
 const Playlists = () => {
-  const [playlists, setPlaylists] = useState([
-    "Playlist 1",
-    "Playlist 2",
-    "Playlist 3",
-    "Playlist 4",
-  ]);
+  const [playlists, setPlaylists] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [modalMessage, setModalMessage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const getUserPlaylists = async () => {
     try {
       const response = await axios.get(`${API}/playlist`);
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setPlaylists(response.data.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -136,12 +135,13 @@ const Playlists = () => {
             </div>
           </div>
         </section>
-        {playlists.length === 0 && (
+        {!loading && playlists.length === 0 && (
           <p className="text-gray-800 dark:text-gray-300 text-lg text-center w-full">
             No playlists found
           </p>
         )}
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 gap-y-12">
+          {loading && <PlaylistLoader />}
           {playlists &&
             playlists.map((playlist, index) => (
               <Playlist key={index} playlist={playlist} />
