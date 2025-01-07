@@ -1,6 +1,7 @@
-// src/pages/PlaylistPage.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Playlist from "../components/playlist/Playlist";
+import axios from "axios";
+import { API } from "../api";
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([
@@ -10,21 +11,43 @@ const Playlists = () => {
     "Playlist 4",
   ]);
   const [showModal, setShowModal] = useState(false);
-  const [newPlaylist, setNewPlaylist] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [message, setMessage] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const getUserPlaylists = async () => {
+    try {
+      const response = await axios.get(`${API}/playlist`);
+      console.log(response.data.data);
+      setPlaylists(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserPlaylists();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !description) {
       setMessage("Please fill in all fields");
     } else {
-      setPlaylists([...playlists, name]);
+      try {
+        const response = await axios.post(`${API}/playlist`, {
+          name,
+          description,
+        });
+        setPlaylists([...playlists, response.data.data]);
+      } catch (error) {
+        console.log(error);
+      }
+
       setShowModal(false);
       setName("");
       setDescription("");
-      setMessage("");
+      setModalMessage("");
     }
   };
 
@@ -96,9 +119,9 @@ const Playlists = () => {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
-                  {message && (
+                  {modalMessage && (
                     <div className="text-red-500 text-sm font-medium text-center width-full">
-                      {message}
+                      {modalMessage}
                     </div>
                   )}
                   <button
@@ -113,10 +136,16 @@ const Playlists = () => {
             </div>
           </div>
         </section>
+        {playlists.length === 0 && (
+          <p className="text-gray-800 dark:text-gray-300 text-lg text-center w-full">
+            No playlists found
+          </p>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 gap-y-12">
-          {playlists.map((title, index) => (
-            <Playlist key={index} title={title} />
-          ))}
+          {playlists &&
+            playlists.map((playlist, index) => (
+              <Playlist key={index} playlist={playlist} />
+            ))}
         </div>
       </div>
     </>

@@ -57,6 +57,21 @@ const getUserPlaylists = async (req, res) => {
         );
 };
 
+const getAllUserPlaylists = async (req, res) => {
+    const userPlaylists = await Playlist.find({
+        owner: req.user?.username,
+    }).populate("videos");
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                userPlaylists,
+                "Playlists fetched successfully"
+            )
+        );
+};
+
 const getPlaylistById = async (req, res) => {
     const { playlistId } = req.params;
 
@@ -197,6 +212,7 @@ const updatePlaylist = async (req, res) => {
 export {
     createPlaylist,
     getUserPlaylists,
+    getAllUserPlaylists,
     getPlaylistById,
     addVideoToPlaylist,
     removeVideoFromPlaylist,
