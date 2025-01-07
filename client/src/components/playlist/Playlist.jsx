@@ -1,4 +1,3 @@
-// src/components/PlaylistTitle.jsx
 import React from "react";
 
 const Playlist = ({ title }) => {
