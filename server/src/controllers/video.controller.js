@@ -6,6 +6,7 @@ import {
     deleteImageFromCloudinary,
     deleteVideoFromCloudinary,
 } from "../utils/cloudinary.js";
+import mongoose from "mongoose";
 
 const getAllVideos = async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
@@ -192,7 +193,96 @@ const getVideoById = async (req, res) => {
         return res.status(500).json({ message: "Not a valid video id" });
     }
 
-    const video = await Video.findById(videoId);
+    // const video = await Video.findById(videoId).populate(
+    //     "owner",
+    //     "-password -email -createdAt -updatedAt -__v -refreshToken -watchHistory"
+    // );
+
+    const video = await Video.aggregate([
+        {
+            $match: {
+                _id: new mongoose.Types.ObjectId(videoId),
+            },
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+            },
+        },
+        {
+            $lookup: {
+                from: "subscriptions",
+                localField: "owner._id",
+                foreignField: "channel",
+                as: "subscribers",
+            },
+        },
+        {
+            $lookup: {
+                from: "comments",
+                localField: "_id",
+                foreignField: "video",
+                as: "comments",
+                pipeline: [
+                    {
+                        $lookup: {
+                            from: "users",
+                            localField: "owner",
+                            foreignField: "_id",
+                            as: "owner",
+                        },
+                    },
+                    {
+                        $unwind: "$owner",
+                    },
+                    {
+                        $project: {
+                            __v: 0,
+                            video: 0,
+                            "owner.password": 0,
+                            "owner.email": 0,
+                            "owner.createdAt": 0,
+                            "owner.updatedAt": 0,
+                            "owner.__v": 0,
+                            "owner.refreshToken": 0,
+                            "owner.watchHistory": 0,
+                        },
+                    },
+                ],
+            },
+        },
+        {
+            $unwind: "$owner",
+        },
+        {
+            $addFields: {
+                subscribersCount: {
+                    $size: "$subscribers",
+                },
+                isSubscribed: {
+                    $cond: {
+                        if: { $in: [req.user?._id, "$subscribers.subscriber"] },
+                        then: true,
+                        else: false,
+                    },
+                },
+            },
+        },
+        {
+            $project: {
+                "owner.password": 0,
+                "owner.email": 0,
+                "owner.createdAt": 0,
+                "owner.updatedAt": 0,
+                "owner.__v": 0,
+                "owner.refreshToken": 0,
+                "owner.watchHistory": 0,
+            },
+        },
+    ]);
 
     if (!video) {
         return res.status(500).json({ message: "Video not found" });
@@ -200,7 +290,7 @@ const getVideoById = async (req, res) => {
 
     return res
         .status(200)
-        .json(new ApiResponse(200, video, "Video found successfully"));
+        .json(new ApiResponse(200, video[0], "Video found successfully"));
 };
 
 const updateVideo = async (req, res) => {

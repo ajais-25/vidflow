@@ -1,10 +1,8 @@
 import { useState } from "react";
 
-const VideoDescription = () => {
+const VideoDescription = ({ description }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [description, setDescription] = useState(
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aperiam ut harum accusantium dolor excepturi omnis repellendus minus, sint assumenda fugiat fugit sunt, quibusdam dolore at nostrum dignissimos cupiditate fuga culpa. Eligendi vel dicta id, odit dolorum laboriosam quasi modi?"
-  );
+  const [showShowMore, setShowShowMore] = useState(false);
 
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
@@ -12,22 +10,25 @@ const VideoDescription = () => {
 
   return (
     <div className="mt-4">
-      <button
-        onClick={toggleDescription}
-        className="text-sm text-blue-500 dark:text-blue-400"
-      >
-        {isExpanded ? "Show less" : "Show more"}
-      </button>
+      <span className="block">Description:</span>
+      {description?.length > 100 && (
+        <button
+          onClick={toggleDescription}
+          className="text-sm text-blue-500 dark:text-blue-400"
+        >
+          {isExpanded ? "Show less" : "Show more"}
+        </button>
+      )}
       <div
         className={`mt-2 transition-max-height duration-500 ease-in-out ${
-          isExpanded ? "max-h-96" : "max-h-12 overflow-hidden"
+          isExpanded ? "max-h-96" : "max-h-12"
         }`}
       >
-        <p className="text-sm text-gray-700 dark:text-gray-300">
+        <p className="text-sm text-gray-700 dark:text-gray-300 bg-blue-100 dark:bg-blue-900 p-2 px-4 rounded-lg">
           {isExpanded
             ? description
-            : description.slice(0, 100) +
-              (description.length > 100 ? "..." : "")}
+            : description?.slice(0, 100) +
+              (description?.length > 100 ? "..." : "")}
         </p>
       </div>
     </div>

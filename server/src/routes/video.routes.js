@@ -29,7 +29,7 @@ router.route("/").post(
 );
 
 router.route("/").get(getAllVideos);
-router.route("/:username").get(getVideosByUsername);
+router.route("/u/:username").get(getVideosByUsername);
 
 router
     .route("/:videoId")

@@ -27,7 +27,7 @@ const ChannelDashboard = () => {
 
   const getChannelVideos = async () => {
     try {
-      const response = await axios.get(`${API}/videos/${username}`);
+      const response = await axios.get(`${API}/videos/u/${username}`);
       // console.log(response.data.data);
       setChannelVideos(response.data.data);
     } catch (err) {
