@@ -400,6 +400,9 @@ const viewVideo = async (req, res) => {
 
     video.views += 1;
     await video.save({ validateBeforeSave: false });
+    if (req.user.watchHistory.includes(video._id)) {
+        req.user.watchHistory.pull(video._id);
+    }
     req.user.watchHistory.push(video._id);
     await req.user.save({ validateBeforeSave: false });
 
