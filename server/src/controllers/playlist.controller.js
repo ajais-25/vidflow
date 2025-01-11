@@ -15,7 +15,7 @@ const createPlaylist = async (req, res) => {
         name,
         description,
         videos: [],
-        owner: req.user?.username,
+        owner: req.user?._id,
     });
 
     const createdPlaylist = await Playlist.findById(playlist._id);
@@ -59,7 +59,7 @@ const getUserPlaylists = async (req, res) => {
 
 const getAllUserPlaylists = async (req, res) => {
     const userPlaylists = await Playlist.find({
-        owner: req.user?.username,
+        owner: req.user?._id,
     }).populate("videos");
     return res
         .status(200)
@@ -83,7 +83,42 @@ const getPlaylistById = async (req, res) => {
         return res.status(400).json({ message: "Not a valid playlist id" });
     }
 
-    const playlist = await Playlist.findById(playlistId);
+    // const playlist = await Playlist.findById(playlistId);
+
+    const playlist = await Playlist.aggregate([
+        {
+            $match: { _id: playlistId },
+        },
+        {
+            $lookup: {
+                from: "videos",
+                localField: "videos",
+                foreignField: "_id",
+                as: "videos",
+            },
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+            },
+        },
+        {
+            $project: {
+                name: 1,
+                description: 1,
+                videos: {
+                    _id: 1,
+                    title: 1,
+                    description: 1,
+                    thumbnail: 1,
+                    videoUrl: 1,
+                },
+            },
+        },
+    ]);
 
     if (!playlist) {
         return res.status(404).json({ message: "Playlist not found" });

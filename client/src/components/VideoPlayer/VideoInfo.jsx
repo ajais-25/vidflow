@@ -2,16 +2,11 @@ import { useState } from "react";
 import AddToPlaylistModal from "../Playlist/AddToPlaylistModal";
 import axios from "axios";
 import { API } from "../../api";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-const VideoInfo = ({
-  owner,
-  subscribers,
-  isSubscribed,
-  setIsSubscribed,
-  videoId,
-}) => {
+const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
   const [showModal, setShowModal] = useState(false);
+  const { videoId } = useParams();
 
   const handleSubscribe = async () => {
     try {
@@ -51,11 +46,7 @@ const VideoInfo = ({
         >
           Add
         </button>
-        <AddToPlaylistModal
-          showModal={showModal}
-          setShowModal={setShowModal}
-          video={videoId}
-        />
+        <AddToPlaylistModal showModal={showModal} setShowModal={setShowModal} />
         <button
           className={`${
             isSubscribed ? "bg-gray-500" : "bg-red-500"

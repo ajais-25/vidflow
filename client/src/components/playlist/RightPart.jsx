@@ -28,7 +28,7 @@ const videoData = [
   },
 ];
 
-const RightPart = () => {
+const RightPart = ({ playlist }) => {
   return (
     <div className="flex-1 p-2 m-4 lg:ml-96 rounded-lg">
       {videoData.map((video, index) => (

@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API } from "../../api";
+import { useParams } from "react-router-dom";
 
-const AddToPlaylistModal = ({ showModal, setShowModal, videoId }) => {
+const AddToPlaylistModal = ({ showModal, setShowModal }) => {
   // const playlists = [
   //   {
   //     _id: "1",
@@ -23,7 +24,8 @@ const AddToPlaylistModal = ({ showModal, setShowModal, videoId }) => {
   // ];
 
   const [playlists, setPlaylists] = useState([]);
-  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(playlists[0]);
+  const { videoId } = useParams();
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -40,6 +42,7 @@ const AddToPlaylistModal = ({ showModal, setShowModal, videoId }) => {
   }, []);
 
   const handleSubmit = async () => {
+    // console.log(videoId, selectedPlaylist._id);
     try {
       await axios.patch(
         `${API}/playlist/add/${videoId}/${selectedPlaylist._id}`
@@ -78,15 +81,25 @@ const AddToPlaylistModal = ({ showModal, setShowModal, videoId }) => {
                 className="w-full mt-4 overflow-y-auto max-h-60"
                 style={{ scrollbarWidth: "thin" }}
               >
+                {playlists?.length === 0 && (
+                  <p className="text-center text-gray-500 dark:text-gray-400">
+                    No playlists found
+                  </p>
+                )}
                 {playlists &&
                   playlists.map((playlist) => (
                     <li
-                      className={`${
-                        selectedPlaylist?._id === playlist._id
-                          ? "bg-blue-300 dark:bg-blue-400 hover:bg-blue-400 dark:hover:bg-blue-500"
-                          : ""
-                      } cursor-pointer mb-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 transition-all duration-50 rounded-md p-2 px-4`}
-                      key={playlist._id}
+                      className={`cursor-pointer mb-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 transition-all duration-50 rounded-md p-2 px-4`}
+                      style={
+                        selectedPlaylist &&
+                        selectedPlaylist?._id === playlist?._id
+                          ? {
+                              backgroundColor: "#2563EB",
+                              color: "white",
+                            }
+                          : {}
+                      }
+                      key={playlist?._id}
                       onClick={() => setSelectedPlaylist(playlist)}
                     >
                       {playlist.name}

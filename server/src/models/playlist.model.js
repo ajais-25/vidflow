@@ -17,7 +17,8 @@ const playlistSchema = new Schema(
             },
         ],
         owner: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: "User",
             required: true,
         },
     },

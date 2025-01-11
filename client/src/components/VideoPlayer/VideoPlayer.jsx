@@ -19,6 +19,11 @@ const VideoPlayer = ({ videoId, videoUrl }) => {
   return (
     <div className="w-full h-80 rounded-lg">
       {/* Replace with a video player later */}
+      {!videoUrl && (
+        <div className="w-full h-full bg-gray-800 flex items-center justify-center rounded-lg">
+          <p className="text-white">Loading...</p>
+        </div>
+      )}
       <ReactPlayer
         url={videoUrl}
         controls={true}

@@ -54,7 +54,7 @@ const Sidebar = ({ isOpen }) => {
         </li>
         <li>
           <NavLink
-            to="/playlists"
+            to="/playlist"
             className={({ isActive }) =>
               `p-2 rounded-lg block ${
                 isActive

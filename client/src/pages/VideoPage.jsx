@@ -37,11 +37,10 @@ const VideoPage = () => {
         subscribers={video?.subscribers}
         isSubscribed={isSubscribed}
         setIsSubscribed={setIsSubscribed}
-        videoId={videoId}
       />
       <VideoStats views={video?.views} time={video?.createdAt} />
       <VideoDescription description={video?.description} />
-      <CommentSection comments={video?.comments} videoId={videoId} />
+      <CommentSection comments={video?.comments} />
     </div>
   );
 };
