@@ -28,12 +28,11 @@ const videoData = [
   },
 ];
 
-const RightPart = ({ playlist }) => {
+const RightPart = ({ videos }) => {
   return (
     <div className="flex-1 p-2 m-4 lg:ml-96 rounded-lg">
-      {videoData.map((video, index) => (
-        <PlaylistVideo key={index} video={video} />
-      ))}
+      {videos &&
+        videos.map((video) => <PlaylistVideo key={video?._id} video={video} />)}
     </div>
   );
 };

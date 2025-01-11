@@ -17,7 +17,7 @@ const ChannelDashboard = () => {
   const getChannelProfile = async () => {
     try {
       const response = await axios.get(`${API}/users/c/${username}`);
-      // console.log(response.data.data);
+      console.log(response.data.data);
       setChannelProfile(response.data.data);
       setIsSubscribed(response.data.data.isSubscribed);
     } catch (err) {
@@ -28,7 +28,7 @@ const ChannelDashboard = () => {
   const getChannelVideos = async () => {
     try {
       const response = await axios.get(`${API}/videos/u/${username}`);
-      // console.log(response.data.data);
+      console.log(response.data.data);
       setChannelVideos(response.data.data);
     } catch (err) {
       console.log(err);
@@ -38,7 +38,7 @@ const ChannelDashboard = () => {
   const getChannelPlaylists = async () => {
     try {
       const response = await axios.get(`${API}/playlist/user/${username}`);
-      // console.log(response.data.data);
+      console.log(response.data.data);
       setChannelPlaylists(response.data.data);
     } catch (err) {
       console.log(err);

@@ -1,4 +1,4 @@
-import { isValidObjectId } from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 import { Playlist } from "../models/playlist.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
@@ -87,7 +87,7 @@ const getPlaylistById = async (req, res) => {
 
     const playlist = await Playlist.aggregate([
         {
-            $match: { _id: playlistId },
+            $match: { _id: new mongoose.Types.ObjectId(playlistId) },
         },
         {
             $lookup: {
@@ -95,6 +95,34 @@ const getPlaylistById = async (req, res) => {
                 localField: "videos",
                 foreignField: "_id",
                 as: "videos",
+                pipeline: [
+                    {
+                        $lookup: {
+                            from: "users",
+                            localField: "owner",
+                            foreignField: "_id",
+                            as: "owner",
+                        },
+                    },
+                    {
+                        $unwind: "$owner",
+                    },
+                    {
+                        $project: {
+                            title: 1,
+                            views: 1,
+                            createdAt: 1,
+                            thumbnail: 1,
+                            duration: 1,
+                            owner: {
+                                _id: 1,
+                                fullName: 1,
+                                username: 1,
+                                avatar: 1,
+                            },
+                        },
+                    },
+                ],
             },
         },
         {
@@ -103,20 +131,19 @@ const getPlaylistById = async (req, res) => {
                 localField: "owner",
                 foreignField: "_id",
                 as: "owner",
+                pipeline: [
+                    {
+                        $project: {
+                            _id: 1,
+                            fullName: 1,
+                            username: 1,
+                        },
+                    },
+                ],
             },
         },
         {
-            $project: {
-                name: 1,
-                description: 1,
-                videos: {
-                    _id: 1,
-                    title: 1,
-                    description: 1,
-                    thumbnail: 1,
-                    videoUrl: 1,
-                },
-            },
+            $unwind: "$owner",
         },
     ]);
 
@@ -126,7 +153,7 @@ const getPlaylistById = async (req, res) => {
 
     return res
         .status(200)
-        .json(new ApiResponse(200, playlist, "Playlist found successfully"));
+        .json(new ApiResponse(200, playlist[0], "Playlist found successfully"));
 };
 
 const addVideoToPlaylist = async (req, res) => {
