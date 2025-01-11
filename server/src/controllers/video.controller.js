@@ -193,11 +193,6 @@ const getVideoById = async (req, res) => {
         return res.status(500).json({ message: "Not a valid video id" });
     }
 
-    // const video = await Video.findById(videoId).populate(
-    //     "owner",
-    //     "-password -email -createdAt -updatedAt -__v -refreshToken -watchHistory"
-    // );
-
     const video = await Video.aggregate([
         {
             $match: {

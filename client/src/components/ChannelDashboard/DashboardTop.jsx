@@ -3,18 +3,11 @@ import avatar_black from "../../assets/images/avatar_black.png";
 import avatar_white from "../../assets/images/avatar_white.png";
 import axios from "axios";
 import { API } from "../../api";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
-  // const [isDarkTheme, setIsDarkTheme] = useState(false);
-  // if (document.documentElement.classList.contains("dark")) {
-  //   setIsDarkTheme(true);
-  // }
-
-  // const [isOwner, setIsOwner] = useState(false);
-  // fix this later
-  // if(channelProfile?._id === user._id) {
-  //   setIsOwner(true);
-  // }
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     setIsSubscribed(channelProfile?.isSubscribed);
@@ -59,14 +52,22 @@ const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
             </p>
           </div>
         </div>
-        <button
-          className={`${
-            isSubscribed ? "bg-gray-500" : "bg-red-500"
-          } text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg`}
-          onClick={handleSubscribe}
-        >
-          {isSubscribed ? "Unsubscribe" : "Subscribe"}
-        </button>
+        {user.username === channelProfile?.username ? (
+          <Link to="/upload">
+            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+              Upload
+            </button>
+          </Link>
+        ) : (
+          <button
+            className={`${
+              isSubscribed ? "bg-gray-500" : "bg-red-500"
+            } text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg`}
+            onClick={handleSubscribe}
+          >
+            {isSubscribed ? "Unsubscribe" : "Subscribe"}
+          </button>
+        )}
       </div>
     </div>
   );

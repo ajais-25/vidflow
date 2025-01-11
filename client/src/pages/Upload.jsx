@@ -1,16 +1,43 @@
 import React, { useState } from "react";
 import upload_black from "../assets/images/upload_black.png";
+import axios from "axios";
+import { API } from "../api";
 
 const Upload = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
-  const [video, setVideo] = useState(null);
+  const [videoFile, setVideoFile] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
+  const [message, setMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(title, description, status, video, thumbnail);
+
+    try {
+      setMessage("Uploading video...");
+      const response = await axios.post(
+        `${API}/videos`,
+        {
+          title,
+          description,
+          status,
+          videoFile,
+          thumbnail,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setMessage("");
+      setSuccessMessage("Video uploaded successfully");
+    } catch (error) {
+      console.error(error);
+      setMessage("Failed to upload video");
+    }
   };
 
   return (
@@ -20,11 +47,7 @@ const Upload = () => {
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-2xl font-bold">Upload Video</h1>
           </div>
-          <form
-            className="space-y-4"
-            encType="multipart/form-data"
-            onSubmit={handleSubmit}
-          >
+          <form className="space-y-4" onSubmit={handleSubmit}>
             {/* Title */}
             <div>
               <label className="block text-sm font-medium mb-1">Title*</label>
@@ -57,9 +80,8 @@ const Upload = () => {
                 <input
                   type="file"
                   className="cursor-pointer mt-1"
-                  accept="video/*"
                   required
-                  onChange={(e) => setVideo(e.target.files[0])}
+                  onChange={(e) => setVideoFile(e.target.files[0])}
                 />
               </div>
               <div className="flex flex-col justify-center">
@@ -69,7 +91,6 @@ const Upload = () => {
                 <input
                   type="file"
                   className="cursor-pointer mt-1"
-                  accept="image/*"
                   required
                   onChange={(e) => setThumbnail(e.target.files[0])}
                 />
@@ -106,7 +127,14 @@ const Upload = () => {
                 </label>
               </div>
             </div>
-
+            {message && (
+              <div className="text-red-500 text-sm text-center">{message}</div>
+            )}
+            {successMessage && (
+              <div className="text-green-500 text-sm text-center">
+                {successMessage}
+              </div>
+            )}
             {/* Upload Button */}
             <button
               type="submit"
