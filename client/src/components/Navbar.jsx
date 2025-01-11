@@ -3,24 +3,16 @@ import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import avatar_black from "../assets/images/avatar_black.png";
 import avatar_white from "../assets/images/avatar_white.png";
-import axios from "axios";
-import { API } from "../api";
-
-const getCurrentUser = async () => {
-  try {
-    const response = await axios(`${API}/users/current-user`);
-    return response.data.data;
-  } catch (error) {
-    console.error("Error fetching current user: ", error);
-  }
-};
+import { useSelector } from "react-redux";
 
 const Navbar = ({ toggleSidebar }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    getCurrentUser().then((user) => setCurrentUser(user));
+    // console.log(user);
+    setCurrentUser(user);
   }, []);
 
   const joinedDate =

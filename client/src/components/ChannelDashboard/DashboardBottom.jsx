@@ -28,6 +28,10 @@ const DashboardBottom = ({ tabSelected, channelVideos, channelPlaylists }) => {
               No playlists found
             </div>
           )}
+          {channelPlaylists &&
+            channelPlaylists.map((playlist) => (
+              <Playlist key={playlist._id} playlist={playlist} />
+            ))}
         </>
       )}
     </div>

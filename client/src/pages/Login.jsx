@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../features/authSlice";
 import { API } from "../api";
 import axios from "axios";
 
@@ -7,6 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -15,10 +18,12 @@ const Login = () => {
     setMessage("Please wait...");
 
     try {
-      await axios.post(`${API}/users/login`, {
+      const response = await axios.post(`${API}/users/login`, {
         email,
         password,
       });
+      // console.log(response.data.data);
+      dispatch(login({ user: response.data.data }));
       setEmail("");
       setPassword("");
       navigate("/");

@@ -119,15 +119,7 @@ const loginUser = async (req, res) => {
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(
-            new ApiResponse(
-                200,
-                {
-                    user: loggedInUser,
-                    accessToken,
-                    refreshToken,
-                },
-                "User logged In Successfully"
-            )
+            new ApiResponse(200, loggedInUser[0], "User logged In Successfully")
         );
 };
 
@@ -301,6 +293,8 @@ const getUserChannelProfile = async (req, res) => {
     if (!username?.trim()) {
         return res.status(400).json({ message: "User id is missing" });
     }
+
+    // console.log(`Username: ${username}`);
 
     const channel = await User.aggregate([
         {

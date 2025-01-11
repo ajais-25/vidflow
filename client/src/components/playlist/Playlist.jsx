@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Playlist = ({ playlist }) => {
-  const playlistVideos = playlist?.videos;
-  const image = playlistVideos?.[0]?.thumbnail;
-
   return (
     <Link
       to={`/playlist/${playlist?._id}`}
@@ -15,7 +12,7 @@ const Playlist = ({ playlist }) => {
         <div className="w-full h-44 bg-gray-300 dark:bg-gray-600 rounded-lg shadow-md absolute top-2"></div>
         <div className="w-full h-44 bg-gray-400 dark:bg-gray-500 rounded-lg shadow-md absolute top-4">
           <img
-            src={image}
+            src={playlist && playlist.videos[0]?.thumbnail}
             alt=""
             className="object-cover w-full h-full rounded-lg shadow-md"
           />
