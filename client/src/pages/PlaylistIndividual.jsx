@@ -16,7 +16,7 @@ const PlaylistIndividual = () => {
       // console.log(response.data.data);
       setPlaylist(response.data.data);
       setVideos(response.data.data.videos);
-      console.log(response.data.data.videos);
+      // console.log(response.data.data.videos);
     } catch (error) {
       console.error(error);
     }

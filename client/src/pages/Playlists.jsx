@@ -31,7 +31,7 @@ const Playlists = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !description) {
-      setMessage("Please fill in all fields");
+      setModalMessage("Please fill in all fields");
     } else {
       try {
         const response = await axios.post(`${API}/playlist`, {
@@ -52,7 +52,7 @@ const Playlists = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen dark:bg-gray-900 py-24 px-10 flex flex-col relative">
+      <div className="w-full min-h-screen dark:bg-gray-900 py-24 px-10 flex flex-col">
         <div className="flex justify-between items-center gap-2 mb-10">
           <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Your Playlists
@@ -67,14 +67,17 @@ const Playlists = () => {
         <section
           className={`${
             showModal ? "block" : "hidden"
-          } absolute top-0 left-0 w-full h-full bg-gray-900 dark:bg-slate-700 dark:bg-opacity-50 bg-opacity-50 z-10`}
+          } fixed top-0 left-0 w-full h-full bg-gray-900 dark:bg-slate-700 dark:bg-opacity-50 bg-opacity-50 z-10`}
         >
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8 relative">
                 <div
                   className="hover:bg-gray-300 hover:dark:bg-gray-600 transition-all duration-50 cursor-pointer rounded-md text-xl w-5 flex justify-center items-center absolute top-4 right-4"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    setShowModal(false);
+                    setModalMessage("");
+                  }}
                 >
                   X
                 </div>

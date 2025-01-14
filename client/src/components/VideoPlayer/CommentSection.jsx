@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { API } from "../../api";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function getTimeDifference(updatedTime) {
   const currentTime = new Date();
@@ -34,6 +35,7 @@ function getTimeDifference(updatedTime) {
 const CommentSection = ({ comments }) => {
   const [newComment, setNewComment] = useState("");
   const { videoId } = useParams();
+  const user = useSelector((state) => state.auth.user);
 
   const handleCommentSubmit = async () => {
     const content = newComment.trim();
@@ -59,7 +61,11 @@ const CommentSection = ({ comments }) => {
       {/* Add Comment Input */}
       <div className="flex items-center mb-6">
         <div className="w-12 h-12 rounded-full bg-gray-300 dark:bg-gray-700">
-          {/* TODO: Add user avatar here */}
+          <img
+            src={user?.avatar}
+            alt=""
+            className="w-12 h-12 rounded-full object-cover"
+          />
         </div>
         <input
           type="text"
