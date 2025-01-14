@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import avatar_black from "../assets/images/avatar_black.png";
@@ -11,12 +11,17 @@ import { API } from "../api";
 const Navbar = ({ toggleSidebar }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const themeBtnRef = useRef(null);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     // console.log(user);
+    const savedTheme = localStorage.getItem("theme") || "light"; // Default to light
+    document.documentElement.classList.add(savedTheme);
+    setIsDarkTheme(savedTheme === "dark");
+    themeBtnRef.current.checked = savedTheme === "dark";
     setCurrentUser(user);
   }, []);
 
@@ -26,6 +31,10 @@ const Navbar = ({ toggleSidebar }) => {
 
   const toggleTheme = () => {
     document.documentElement.classList.toggle("dark");
+    localStorage.setItem(
+      "theme",
+      document.documentElement.classList.contains("dark") ? "dark" : "light"
+    );
     setIsDarkTheme(!isDarkTheme);
   };
 
@@ -63,7 +72,7 @@ const Navbar = ({ toggleSidebar }) => {
 
       <div className="flex items-center">
         {/* Theme Toggle Button */}
-        <ThemeToggle toggleTheme={toggleTheme} />
+        <ThemeToggle refer={themeBtnRef} toggleTheme={toggleTheme} />
 
         {/* Profile Section */}
         <div className="relative ml-4">

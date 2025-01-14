@@ -1,8 +1,10 @@
+import { loadState, saveState } from "../helper/sessionStorage";
 import { createSlice } from "@reduxjs/toolkit";
 
+const sessionKey = "user";
+
 const initialState = {
-  status: false,
-  user: null,
+  user: loadState(sessionKey, null),
 };
 
 const authSlice = createSlice({
@@ -10,11 +12,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.status = true;
       state.user = action.payload.user;
+      saveState(sessionKey, action.payload.user);
     },
     logout: (state) => {
-      state.status = false;
       state.user = null;
     },
   },

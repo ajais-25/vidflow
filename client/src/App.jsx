@@ -16,7 +16,7 @@ import Loading from "./components/Loading.jsx";
 import { useSelector } from "react-redux";
 
 const ProtectedRoute = () => {
-  const isLoggedIn = useSelector((state) => state.auth.status);
+  const isLoggedIn = useSelector((state) => state.auth.user);
   return isLoggedIn ? <Layout /> : <Navigate to="/login" />;
 };
 
