@@ -59,24 +59,26 @@ const CommentSection = ({ comments }) => {
       </h2>
 
       {/* Add Comment Input */}
-      <div className="flex items-center mb-6">
-        <div className="w-12 h-12 rounded-full bg-gray-300 dark:bg-gray-700">
-          <img
-            src={user?.avatar}
-            alt=""
-            className="w-12 h-12 rounded-full object-cover"
+      <div className="flex-col items-center mb-6">
+        <div className="flex items-center w-full">
+          <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700">
+            <img
+              src={user?.avatar}
+              alt=""
+              className="w-10 h-10 rounded-full object-cover"
+            />
+          </div>
+          <input
+            type="text"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Add a comment..."
+            className="flex-1 ml-2 p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
-        <input
-          type="text"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Add a comment..."
-          className="flex-1 ml-4 p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100"
-        />
         <button
           onClick={handleCommentSubmit}
-          className="ml-2 px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-blue-600 dark:hover:bg-blue-700"
+          className="mt-4 w-full sm:w-fit px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-blue-600 dark:hover:bg-blue-700"
         >
           Comment
         </button>

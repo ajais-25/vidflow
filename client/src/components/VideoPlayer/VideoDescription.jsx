@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const VideoDescription = ({ description }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [showShowMore, setShowShowMore] = useState(false);
 
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);

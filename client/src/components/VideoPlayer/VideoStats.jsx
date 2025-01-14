@@ -1,3 +1,6 @@
+import { useState } from "react";
+import AddToPlaylistModal from "../Playlist/AddToPlaylistModal";
+
 function getTimeDifference(updatedTime) {
   const currentTime = new Date();
   const updatedDate = new Date(updatedTime);
@@ -28,12 +31,20 @@ function getTimeDifference(updatedTime) {
 
 const VideoStats = ({ views, time }) => {
   const timeDifference = getTimeDifference(time);
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="text-sm text-gray-600 dark:text-gray-400">
+    <div className="text-sm flex justify-between items-center text-gray-600 dark:text-gray-400">
       <p>
         {views} views • {timeDifference}{" "}
       </p>
+      <button
+        className="bg-primary-600 hover:bg-primary-800 text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg mr-2"
+        onClick={() => setShowModal(true)}
+      >
+        Add
+      </button>
+      <AddToPlaylistModal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 };

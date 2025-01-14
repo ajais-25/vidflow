@@ -1,12 +1,9 @@
-import { useState } from "react";
-import AddToPlaylistModal from "../Playlist/AddToPlaylistModal";
 import axios from "axios";
 import { API } from "../../api";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
-  const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.auth.user);
 
   const handleSubscribe = async () => {
@@ -19,7 +16,7 @@ const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
   };
 
   return (
-    <div className="flex items-center justify-between py-4">
+    <div className="flex justify-between items-center mt-4">
       <Link
         to={`/c/${owner?.username}`}
         className="flex items-center hover:underline"
@@ -40,14 +37,7 @@ const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
           </p>
         </div>
       </Link>
-      <div>
-        <button
-          className="bg-primary-600 hover:bg-primary-800 text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg mr-2"
-          onClick={() => setShowModal(true)}
-        >
-          Add
-        </button>
-        <AddToPlaylistModal showModal={showModal} setShowModal={setShowModal} />
+      <div className="flex justify-end items-center mt-4 mb-4 sm:mt-0">
         {
           // If the user is the owner of the video, don't show the subscribe button
           user?._id === owner?._id ? null : (
@@ -61,14 +51,6 @@ const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
             </button>
           )
         }
-        {/* <button
-          className={`${
-            isSubscribed ? "bg-gray-500" : "bg-red-500"
-          } text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg`}
-          onClick={handleSubscribe}
-        >
-          {isSubscribed ? "Unsubscribe" : "Subscribe"}
-        </button> */}
       </div>
     </div>
   );

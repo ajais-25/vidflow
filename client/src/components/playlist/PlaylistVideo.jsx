@@ -2,6 +2,16 @@ import React from "react";
 import { getTimeDifference } from "../../utils";
 import { Link } from "react-router-dom";
 
+function getViews(views) {
+  if (views < 1000) {
+    return views;
+  } else if (views < 1000000) {
+    return `${(views / 1000).toFixed(1)}K`;
+  } else {
+    return `${(views / 1000000).toFixed(1)}M`;
+  }
+}
+
 const PlaylistVideo = ({ video }) => {
   const duration = video?.duration?.toFixed() || 0;
   const seconds = duration % 60;
@@ -12,11 +22,12 @@ const PlaylistVideo = ({ video }) => {
   }:${seconds < 10 ? `0${seconds}` : seconds}`;
 
   const timeDifference = getTimeDifference(video?.createdAt);
+  const views = getViews(video?.views);
 
   return (
     <Link
       to={`/watch/${video?._id}`}
-      className="flex flex-col sm:flex-row items-center gap-6 px-6 py-6 mb-2 cursor-pointer transition-all duration-300 rounded-lg active:scale-95 shadow-md md:hover:bg-gray-200 dark:hover:bg-gray-800"
+      className="flex flex-col sm:flex-row items-center gap-6 p-4 mb-2 cursor-pointer transition-all duration-300 rounded-lg active:scale-95 shadow-md md:hover:bg-gray-200 dark:hover:bg-gray-800"
     >
       <div className="h-36 w-full sm:self-start sm:w-64 rounded-lg bg-gray-400 relative shrink-0">
         <img
@@ -42,7 +53,7 @@ const PlaylistVideo = ({ video }) => {
           </div>
         </div>
         <p className="text-sm mt-1 text-gray-500">
-          {video?.views} views • {timeDifference}
+          {views} views • {timeDifference}
         </p>
       </div>
     </Link>

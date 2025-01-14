@@ -2,6 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getTimeDifference } from "../utils";
 
+function getViews(views) {
+  if (views < 1000) {
+    return views;
+  } else if (views < 1000000) {
+    return `${(views / 1000).toFixed(1)}K`;
+  } else {
+    return `${(views / 1000000).toFixed(1)}M`;
+  }
+}
+
 const VideoCard = ({ isChannelDashboard = false, video }) => {
   const duration = video?.duration?.toFixed() || 0;
   const seconds = duration % 60;
@@ -12,6 +22,7 @@ const VideoCard = ({ isChannelDashboard = false, video }) => {
   }:${seconds < 10 ? `0${seconds}` : seconds}`;
 
   const timeDifference = getTimeDifference(video?.createdAt);
+  const views = getViews(video?.views);
 
   return (
     <Link to={`/watch/${video?._id}`} className="p-4 w-full">
@@ -57,7 +68,7 @@ const VideoCard = ({ isChannelDashboard = false, video }) => {
               </p>
             )}
             <p className="text-gray-500 dark:text-gray-400">
-              {video?.views} views • {timeDifference}
+              {views} views • {timeDifference}
             </p>
           </div>
         </div>

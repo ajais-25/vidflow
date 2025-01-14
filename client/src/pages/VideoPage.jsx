@@ -30,7 +30,7 @@ const VideoPage = () => {
   }, []);
 
   return (
-    <div className="p-4 max-w-2xl mt-20 mx-auto rounded-lg">
+    <div className="p-4 max-w-2xl sm:mt-20 mx-auto rounded-lg">
       <VideoPlayer videoId={videoId} videoUrl={video?.videoFile} />
       <VideoInfo
         owner={video?.owner}

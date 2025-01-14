@@ -23,7 +23,7 @@ const WatchHistory = () => {
   }, []);
 
   return (
-    <div className="container mx-auto py-24 px-10">
+    <div className="container mx-auto py-24 px-4 sm:px-10">
       <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4 px-4">
         Your History
       </p>

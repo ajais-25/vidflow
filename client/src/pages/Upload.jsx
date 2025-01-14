@@ -42,7 +42,7 @@ const Upload = () => {
 
   return (
     <div>
-      <div className="min-h-screen mt-8 flex justify-center items-center bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+      <div className="min-h-screen mt-12 px-4 sm:px-2 flex justify-center items-center bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
         <div className="bg-white dark:bg-gray-800 dark:text-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-2xl font-bold">Upload Video</h1>
@@ -102,7 +102,7 @@ const Upload = () => {
               <span className="block text-sm font-medium mb-1">
                 Select Status*
               </span>
-              <div className="flex space-x-4">
+              <div className="flex gap-4">
                 <label className="flex items-center cursor-pointer">
                   <input
                     type="radio"
