@@ -3,10 +3,11 @@ import AddToPlaylistModal from "../Playlist/AddToPlaylistModal";
 import axios from "axios";
 import { API } from "../../api";
 import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
   const [showModal, setShowModal] = useState(false);
-  const { videoId } = useParams();
+  const user = useSelector((state) => state.auth.user);
 
   const handleSubscribe = async () => {
     try {
@@ -47,14 +48,27 @@ const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
           Add
         </button>
         <AddToPlaylistModal showModal={showModal} setShowModal={setShowModal} />
-        <button
+        {
+          // If the user is the owner of the video, don't show the subscribe button
+          user?._id === owner?._id ? null : (
+            <button
+              className={`${
+                isSubscribed ? "bg-gray-500" : "bg-red-500"
+              } text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg mr-2`}
+              onClick={handleSubscribe}
+            >
+              {isSubscribed ? "Unsubscribe" : "Subscribe"}
+            </button>
+          )
+        }
+        {/* <button
           className={`${
             isSubscribed ? "bg-gray-500" : "bg-red-500"
           } text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg`}
           onClick={handleSubscribe}
         >
           {isSubscribed ? "Unsubscribe" : "Subscribe"}
-        </button>
+        </button> */}
       </div>
     </div>
   );

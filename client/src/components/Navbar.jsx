@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import avatar_black from "../assets/images/avatar_black.png";
 import avatar_white from "../assets/images/avatar_white.png";
-import { useSelector } from "react-redux";
+import { logout } from "../features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { API } from "../api";
 
 const Navbar = ({ toggleSidebar }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // console.log(user);
@@ -30,7 +35,15 @@ const Navbar = ({ toggleSidebar }) => {
     setIsProfileOpen(!isProfileOpen);
   };
 
-  const handleLogout = () => {};
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${API}/users/logout`);
+      dispatch(logout());
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div
@@ -72,7 +85,7 @@ const Navbar = ({ toggleSidebar }) => {
                 Joined: {joinedDate}
               </p>
               <button
-                className="mt-4 w-full text-sm font-semibold text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500"
+                className="mt-4 w-full text-sm font-semibold text-red-500 p-2 rounded-md hover:bg-red-500 hover:text-white dark:text-red-400 dark:hover:text-white dark:hover:bg-red-500 transition-all duration-300"
                 onClick={handleLogout}
               >
                 Logout

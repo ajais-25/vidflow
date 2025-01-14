@@ -33,10 +33,6 @@ const VideoLoader = () => {
       <Skeleton />
       <Skeleton />
       <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
     </>
   );
 };

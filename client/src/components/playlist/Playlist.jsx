@@ -19,7 +19,7 @@ const Playlist = ({ playlist }) => {
         </div>
       </div>
       <p className="mt-6 text-lg text-gray-800 dark:text-gray-300">
-        {playlist && playlist?.name}
+        {playlist && playlist?.name} ({playlist?.videos?.length || 0} videos)
       </p>
     </Link>
   );

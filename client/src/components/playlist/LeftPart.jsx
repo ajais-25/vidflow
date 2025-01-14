@@ -11,7 +11,7 @@ const LeftPart = ({ playlistInfo }) => {
       <div className="h-44 lg:w-full sm:w-72 rounded-lg lg:mb-4 shrink-0 bg-gray-400">
         <img
           src={thumbnail}
-          alt="thumbnail"
+          alt="image"
           className="w-full h-full object-cover rounded-lg"
         />
       </div>

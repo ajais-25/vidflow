@@ -20,10 +20,6 @@ const PlaylistLoader = () => {
       <Skeleton />
       <Skeleton />
       <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
     </>
   );
 };

@@ -18,11 +18,6 @@ const SubscriptionsLoader = () => {
       <Skeleton />
       <Skeleton />
       <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
     </>
   );
 };

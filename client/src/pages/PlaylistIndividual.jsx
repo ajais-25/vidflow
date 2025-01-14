@@ -29,8 +29,12 @@ const PlaylistIndividual = () => {
   return (
     <div className="min-h-screen dark:bg-gray-900 px-4 py-20 text-gray-900 relative dark:text-gray-100">
       <div className="flex flex-col sm:flex-col">
-        <LeftPart playlistInfo={playlist} />
-        <RightPart videos={videos} />
+        {playlist && videos && (
+          <>
+            <LeftPart playlistInfo={playlist} />
+            <RightPart videos={videos} />
+          </>
+        )}
       </div>
     </div>
   );
