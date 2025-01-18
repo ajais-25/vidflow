@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout.jsx";
 const Home = lazy(() => import("./pages/Home.jsx"));
+const LikedVideos = lazy(() => import("./pages/LikedVideos.jsx"));
 const Subscriptions = lazy(() => import("./pages/Subscriptions.jsx"));
 const WatchHistory = lazy(() => import("./pages/WatchHistory.jsx"));
 const Playlists = lazy(() => import("./pages/Playlists.jsx"));
@@ -78,6 +79,14 @@ const App = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <Subscriptions />
+              </Suspense>
+            }
+          />
+          <Route
+            path="liked-videos"
+            element={
+              <Suspense fallback={<Loading />}>
+                <LikedVideos />
               </Suspense>
             }
           />

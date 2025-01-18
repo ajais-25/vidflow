@@ -31,14 +31,18 @@ const VideoPage = () => {
 
   return (
     <div className="p-4 max-w-2xl sm:mt-20 mx-auto rounded-lg">
-      <VideoPlayer videoId={videoId} videoUrl={video?.videoFile} />
+      <VideoPlayer videoId={videoId} video={video} />
       <VideoInfo
         owner={video?.owner}
         subscribers={video?.subscribers}
         isSubscribed={isSubscribed}
         setIsSubscribed={setIsSubscribed}
       />
-      <VideoStats views={video?.views} time={video?.createdAt} />
+      <VideoStats
+        videoId={videoId}
+        views={video?.views}
+        time={video?.createdAt}
+      />
       <VideoDescription description={video?.description} />
       <CommentSection comments={video?.comments} />
     </div>

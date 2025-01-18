@@ -1,49 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddToPlaylistModal from "../Playlist/AddToPlaylistModal";
+import { BiLike, BiSolidLike } from "react-icons/bi";
+import { getTimeDifference } from "../../utils";
+import axios from "axios";
+import { API } from "../../api";
 
-function getTimeDifference(updatedTime) {
-  const currentTime = new Date();
-  const updatedDate = new Date(updatedTime);
-
-  const diffInMilliseconds = currentTime - updatedDate;
-
-  const seconds = Math.floor(diffInMilliseconds / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const months = Math.floor(days / 30.44); // Approximate number of days in a month
-  const years = Math.floor(days / 365.25); // Approximate number of days in a year
-
-  if (seconds < 60) {
-    return `${seconds} seconds ago`;
-  } else if (minutes < 60) {
-    return `${minutes} minutes ago`;
-  } else if (hours < 24) {
-    return `${hours} hours ago`;
-  } else if (days < 30) {
-    return `${days} days ago`;
-  } else if (months < 12) {
-    return `${months} months ago`;
-  } else {
-    return `${years} years ago`;
-  }
-}
-
-const VideoStats = ({ views, time }) => {
+const VideoStats = ({ videoId, views, time }) => {
   const timeDifference = getTimeDifference(time);
   const [showModal, setShowModal] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLike = async () => {
+    if (isLiked) {
+      setLikes(likes - 1);
+      setIsLiked(false);
+    } else {
+      setLikes(likes + 1);
+      setIsLiked(true);
+    }
+    try {
+      const response = await axios.post(`${API}/likes/toggle/v/${videoId}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getLikes = async () => {
+    try {
+      const response = await axios.get(`${API}/likes/v/${videoId}`);
+      setLikes(response.data.data.videoLikes.length);
+      setIsLiked(response.data.data.isLiked);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getLikes();
+  }, [videoId]);
 
   return (
-    <div className="text-sm flex justify-between items-center text-gray-600 dark:text-gray-400">
+    <div className="text-sm flex justify-between items-center text-gray-600 dark:text-gray-400 mt-4">
       <p>
         {views} views • {timeDifference}{" "}
       </p>
-      <button
-        className="bg-primary-600 hover:bg-primary-800 text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg mr-2"
-        onClick={() => setShowModal(true)}
-      >
-        Add
-      </button>
+      <div className="flex justify-between items-center gap-2">
+        <button
+          className="flex items-center justify-center gap-1 p-2 rounded-md transition-colors duration-300 
+                  text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+          aria-label={isLiked ? "Unlike" : "Like"}
+          onClick={handleLike}
+        >
+          {isLiked ? <BiSolidLike size={20} /> : <BiLike size={20} />} {likes}
+        </button>
+        <button
+          className="bg-primary-600 hover:bg-primary-800 text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg mr-2"
+          onClick={() => setShowModal(true)}
+        >
+          Add
+        </button>
+      </div>
       <AddToPlaylistModal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
