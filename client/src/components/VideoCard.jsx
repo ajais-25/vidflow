@@ -6,9 +6,9 @@ function getViews(views) {
   if (views < 1000) {
     return views;
   } else if (views < 1000000) {
-    return `${(views / 1000).toFixed(1)}K`;
+    return `${(views / 1000).toFixed(1)}K`.replace(".0", "");
   } else {
-    return `${(views / 1000000).toFixed(1)}M`;
+    return `${(views / 1000000).toFixed(1)}M`.replace(".0", "");
   }
 }
 

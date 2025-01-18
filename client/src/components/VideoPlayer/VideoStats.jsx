@@ -5,6 +5,16 @@ import { getTimeDifference } from "../../utils";
 import axios from "axios";
 import { API } from "../../api";
 
+function getLikes(likes) {
+  if (likes < 1000) {
+    return likes;
+  } else if (likes < 1000000) {
+    return `${(likes / 1000).toFixed(1)}K`.replace(".0", "");
+  } else {
+    return `${(likes / 1000000).toFixed(1)}M`.replace(".0", "");
+  }
+}
+
 const VideoStats = ({ videoId, views, time }) => {
   const timeDifference = getTimeDifference(time);
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +36,7 @@ const VideoStats = ({ videoId, views, time }) => {
     }
   };
 
-  const getLikes = async () => {
+  const getVideoLikes = async () => {
     try {
       const response = await axios.get(`${API}/likes/v/${videoId}`);
       setLikes(response.data.data.videoLikes.length);
@@ -37,7 +47,7 @@ const VideoStats = ({ videoId, views, time }) => {
   };
 
   useEffect(() => {
-    getLikes();
+    getVideoLikes();
   }, [videoId]);
 
   return (
@@ -52,7 +62,8 @@ const VideoStats = ({ videoId, views, time }) => {
           aria-label={isLiked ? "Unlike" : "Like"}
           onClick={handleLike}
         >
-          {isLiked ? <BiSolidLike size={20} /> : <BiLike size={20} />} {likes}
+          {isLiked ? <BiSolidLike size={20} /> : <BiLike size={20} />}{" "}
+          {getLikes(likes)}
         </button>
         <button
           className="bg-primary-600 hover:bg-primary-800 text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg mr-2"

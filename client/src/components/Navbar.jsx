@@ -7,7 +7,6 @@ import { logout } from "../features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { API } from "../api";
-import { use } from "react";
 
 const Navbar = ({ toggleSidebar }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -91,6 +90,9 @@ const Navbar = ({ toggleSidebar }) => {
           {/* Dropdown Box */}
           {isProfileOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
+              <p className="text-sm text-gray-700 dark:text-gray-200 mb-2">
+                Username: @<span className="font-bold">{user?.username}</span>
+              </p>
               <p className="text-sm text-gray-700 dark:text-gray-200">
                 Joined: {joinedDate}
               </p>
