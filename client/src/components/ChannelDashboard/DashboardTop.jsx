@@ -1,17 +1,40 @@
 import React, { useEffect, useState } from "react";
-import avatar_black from "../../assets/images/avatar_black.png";
-import avatar_white from "../../assets/images/avatar_white.png";
 import axios from "axios";
 import { API } from "../../api";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { updateAvatar } from "../../features/authSlice";
+import { MdModeEditOutline } from "react-icons/md";
 
 const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const [avatar, setAvatar] = useState(user?.avatar);
 
   useEffect(() => {
     setIsSubscribed(channelProfile?.isSubscribed);
   }, []);
+
+  const handleAvatarChange = async (e) => {
+    try {
+      const response = await axios.patch(
+        `${API}/users/avatar`,
+        {
+          avatar: e.target.files[0],
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setAvatar(response.data.data);
+      dispatch(updateAvatar({ avatar: response.data.data }));
+    } catch (error) {
+      console.log(error);
+      setAvatar(user.avatar);
+    }
+  };
 
   const handleSubscribe = async () => {
     try {
@@ -28,16 +51,26 @@ const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
     <div className="p-6 max-w-4xl mx-auto">
       <div className="flex flex-col sm:flex-row gap-6 sm:gap-0 items-center justify-between">
         <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 rounded-full bg-gray-300 dark:bg-gray-700">
+          <div className="w-16 h-16 rounded-full relative bg-gray-300 dark:bg-gray-700">
             <img
-              src={
-                channelProfile?.avatar ||
-                // (isDarkTheme ? avatar_white : avatar_black)
-                ""
-              }
+              src={avatar || ""}
               alt="avatar"
               className="w-16 h-16 rounded-full"
             />
+            {user.username === channelProfile?.username && (
+              <label htmlFor="edit">
+                <input
+                  type="file"
+                  id="edit"
+                  className="hidden"
+                  onChange={handleAvatarChange}
+                />
+                <MdModeEditOutline
+                  id="edit"
+                  className="absolute bottom-0 right-0 bg-blue-500 text-white rounded-full p-1 cursor-pointer"
+                />
+              </label>
+            )}
           </div>
           <div>
             <h1 className="text-xl font-bold">
@@ -53,11 +86,19 @@ const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
           </div>
         </div>
         {user.username === channelProfile?.username ? (
-          <Link to="/upload">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
-              Upload
+          <div className="flex space-x-4">
+            <button
+              className="bg-gray-600 text-white px-4 py-2 rounded-lg
+                transition-all duration-300 active:scale-95"
+            >
+              Edit
             </button>
-          </Link>
+            <Link to="/upload">
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                Upload
+              </button>
+            </Link>
+          </div>
         ) : (
           <button
             className={`${

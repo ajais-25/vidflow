@@ -19,8 +19,12 @@ const authSlice = createSlice({
       state.user = null;
       saveState(sessionKey, null);
     },
+    updateAvatar: (state, action) => {
+      state.user.avatar = action.payload.avatar;
+      saveState(sessionKey, state.user);
+    },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, updateAvatar } = authSlice.actions;
 export default authSlice.reducer;

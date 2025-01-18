@@ -7,6 +7,7 @@ import { logout } from "../features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { API } from "../api";
+import { use } from "react";
 
 const Navbar = ({ toggleSidebar }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = ({ toggleSidebar }) => {
 
   const joinedDate =
     (currentUser && new Date(currentUser.createdAt).toDateString()) || "";
-  const userAvatar = currentUser && currentUser.avatar;
+  const userAvatar = user?.avatar;
 
   const toggleTheme = () => {
     document.documentElement.classList.toggle("dark");

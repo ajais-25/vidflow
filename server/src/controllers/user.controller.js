@@ -284,7 +284,7 @@ const updateUserAvatar = async (req, res) => {
 
     return res
         .status(200)
-        .json(new ApiResponse(200, {}, "Avatar updated successfully"));
+        .json(new ApiResponse(200, avatar.url, "Avatar updated successfully"));
 };
 
 const getUserChannelProfile = async (req, res) => {
