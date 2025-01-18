@@ -23,8 +23,13 @@ const authSlice = createSlice({
       state.user.avatar = action.payload.avatar;
       saveState(sessionKey, state.user);
     },
+    updateAccount: (state, action) => {
+      state.user.fullName = action.payload.name;
+      state.user.email = action.payload.email;
+      saveState(sessionKey, state.user);
+    },
   },
 });
 
-export const { login, logout, updateAvatar } = authSlice.actions;
+export const { login, logout, updateAvatar, updateAccount } = authSlice.actions;
 export default authSlice.reducer;

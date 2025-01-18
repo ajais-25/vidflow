@@ -40,7 +40,7 @@ const AddToPlaylistModal = ({ showModal, setShowModal }) => {
     <section
       className={`${
         showModal ? "block" : "hidden"
-      } fixed top-0 left-0 w-full h-full bg-gray-900 dark:bg-slate-700 dark:bg-opacity-50 bg-opacity-50 z-10`}
+      } fixed top-0 left-0 w-full h-full bg-gray-900 dark:bg-slate-700 dark:bg-opacity-50 bg-opacity-50 z-20`}
     >
       <div className="flex flex-col mt-40 sm:mt-0 items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

@@ -5,11 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { updateAvatar } from "../../features/authSlice";
 import { MdModeEditOutline } from "react-icons/md";
+import EditModal from "../EditModal";
 
 const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const [avatar, setAvatar] = useState(user?.avatar);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setIsSubscribed(channelProfile?.isSubscribed);
@@ -71,13 +73,19 @@ const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
                 />
               </label>
             )}
+            <EditModal showModal={showModal} setShowModal={setShowModal} />
           </div>
           <div>
             <h1 className="text-xl font-bold">
-              {channelProfile?.fullName || ""}
+              {user.username === channelProfile?.username
+                ? user.fullName
+                : channelProfile?.fullName || ""}
             </h1>
             <p className="text-gray-500 dark:text-gray-400 text-sm">
-              @{channelProfile?.username || ""}
+              @
+              {user.username === channelProfile?.username
+                ? user.username
+                : channelProfile?.username || ""}
             </p>
             <p>
               {channelProfile?.subscribersCount || 0} subscribers ·{" "}
@@ -90,6 +98,7 @@ const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
             <button
               className="bg-gray-600 text-white px-4 py-2 rounded-lg
                 transition-all duration-300 active:scale-95"
+              onClick={() => setShowModal(true)}
             >
               Edit
             </button>

@@ -225,18 +225,16 @@ const getCurrentUser = async (req, res) => {
 };
 
 const updateAccountDetails = async (req, res) => {
-    const { email, username } = req.body;
+    const { fullName, email } = req.body;
 
-    if (!email || !username) {
-        return res
-            .status(400)
-            .json({ message: "Email or username is required" });
+    if (!fullName || !email) {
+        return res.status(400).json({ message: "All fields are required" });
     }
 
     const user = await User.findByIdAndUpdate(
         req.user._id,
         {
-            $set: { email, username },
+            $set: { fullName, email },
         },
         { new: true }
     );

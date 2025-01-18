@@ -51,7 +51,7 @@ const ChannelDashboard = () => {
     getChannelProfile();
     getChannelVideos();
     getChannelPlaylists();
-  }, []);
+  }, [username]);
 
   return (
     <div>

@@ -17,7 +17,7 @@ const Playlist = ({ playlist }) => {
             className="object-cover w-full h-full rounded-lg shadow-md"
           />
         </div>
-        <div className="z-8 px-1 py-1 rounded-md shadow-sm absolute bottom-0 right-2 bg-black text-white text-md">
+        <div className="z-10 px-1 py-1 rounded-md shadow-sm absolute -bottom-2 right-2 bg-black text-white text-md">
           {playlist?.videos?.length || 0} videos
         </div>
       </div>

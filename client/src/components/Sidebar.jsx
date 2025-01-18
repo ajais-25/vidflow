@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ isOpen }) => {
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <div
       className={`fixed top-0 left-0 w-64 bg-gray-200 z-50 dark:bg-gray-900 h-full transition-transform transform ${
@@ -36,6 +39,20 @@ const Sidebar = ({ isOpen }) => {
             }
           >
             Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to={`/c/${user?.username}`}
+            className={({ isActive }) =>
+              `p-2 rounded-lg block ${
+                isActive
+                  ? "bg-gray-400 dark:bg-gray-600"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            Dashboard
           </NavLink>
         </li>
         <li>
