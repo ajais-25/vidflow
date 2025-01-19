@@ -27,7 +27,7 @@ const Subscriptions = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 mx-auto py-24 px-10">
+    <div className="container min-h-screen dark:bg-gray-900 transition-colors duration-300 mx-auto py-24 px-10">
       <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-8">
         Your Subscriptions
       </p>

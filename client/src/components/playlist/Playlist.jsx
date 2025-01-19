@@ -12,7 +12,7 @@ const Playlist = ({ playlist }) => {
         <div className="w-full h-44 bg-gray-300 dark:bg-gray-600 rounded-lg shadow-md absolute top-2"></div>
         <div className="w-full h-44 bg-gray-400 dark:bg-gray-500 rounded-lg shadow-md absolute top-4">
           <img
-            src={playlist && playlist.videos[0]?.thumbnail}
+            src={playlist?.videos?.[0]?.thumbnail}
             alt=""
             className="object-cover w-full h-full rounded-lg shadow-md"
           />
