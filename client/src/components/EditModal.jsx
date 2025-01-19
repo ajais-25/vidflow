@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { API } from "../api";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAccount } from "../features/authSlice";
+import { toast } from "react-toastify";
 
 const EditModal = ({ showModal, setShowModal }) => {
   const user = useSelector((state) => state.auth.user);
@@ -22,9 +23,11 @@ const EditModal = ({ showModal, setShowModal }) => {
       dispatch(updateAccount({ name, email }));
       setModalMessage("");
       setShowModal(false);
+      toast.success(response.data.message);
     } catch (error) {
       console.log(error);
       setModalMessage("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     }
   };
 

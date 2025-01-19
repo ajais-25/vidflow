@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API } from "../../api";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddToPlaylistModal = ({ showModal, setShowModal }) => {
   const [playlists, setPlaylists] = useState([]);
@@ -30,9 +31,10 @@ const AddToPlaylistModal = ({ showModal, setShowModal }) => {
       );
       setShowModal(false);
       setSelectedPlaylist(null);
-      // console.log("Video added to playlist");
+      toast.success("Video added to playlist");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to add video to playlist");
     }
   };
 

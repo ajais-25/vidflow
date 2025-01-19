@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { updateAvatar } from "../../features/authSlice";
 import { MdModeEditOutline } from "react-icons/md";
 import EditModal from "../EditModal";
+import { toast } from "react-toastify";
 
 const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
   const user = useSelector((state) => state.auth.user);
@@ -32,9 +33,11 @@ const DashboardTop = ({ channelProfile, isSubscribed, setIsSubscribed }) => {
       );
       setAvatar(response.data.data);
       dispatch(updateAvatar({ avatar: response.data.data }));
+      toast.success("Avatar updated successfully");
     } catch (error) {
       console.log(error);
       setAvatar(user.avatar);
+      toast.error("Failed to update avatar");
     }
   };
 
