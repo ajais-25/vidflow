@@ -136,7 +136,7 @@ const publishAVideo = async (req, res) => {
         videoFileLocalPath = req.files.videoFile[0].path;
     }
 
-    console.log(videoFileLocalPath);
+    // console.log(videoFileLocalPath);
 
     let thumbnailLocalPath;
 
@@ -144,12 +144,12 @@ const publishAVideo = async (req, res) => {
         thumbnailLocalPath = req.files.thumbnail[0].path;
     }
 
-    console.log(thumbnailLocalPath);
+    // console.log(thumbnailLocalPath);
 
     const videoFile = await uploadOnCloudinary(videoFileLocalPath);
     const thumbnail = await uploadOnCloudinary(thumbnailLocalPath);
 
-    console.log(videoFile);
+    // console.log(videoFile);
 
     if (!videoFile || !thumbnail) {
         return res
