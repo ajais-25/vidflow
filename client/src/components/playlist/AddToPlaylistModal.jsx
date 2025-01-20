@@ -24,7 +24,10 @@ const AddToPlaylistModal = ({ showModal, setShowModal }) => {
   }, []);
 
   const handleSubmit = async () => {
-    // console.log(videoId, selectedPlaylist._id);
+    if (!selectedPlaylist) {
+      return toast.error("Please select a playlist");
+    }
+
     try {
       await axios.patch(
         `${API}/playlist/add/${videoId}/${selectedPlaylist._id}`

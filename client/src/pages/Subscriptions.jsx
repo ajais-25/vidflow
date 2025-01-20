@@ -27,7 +27,7 @@ const Subscriptions = () => {
   }, []);
 
   return (
-    <div className="container min-h-screen dark:bg-gray-900 transition-colors duration-300 mx-auto py-24 px-10">
+    <div className="min-h-screen dark:bg-gray-900 transition-colors duration-300 py-24 px-10">
       <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-8">
         Your Subscriptions
       </p>
@@ -36,7 +36,7 @@ const Subscriptions = () => {
           {message}
         </p>
       )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 min-[1736px]:grid-cols-6 min-[2250px]:grid-cols-7 gap-6">
         {loading && <SubscriptionsLoader />}
         {subscriptions &&
           subscriptions.map((channel, index) => (

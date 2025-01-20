@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import upload_black from "../assets/images/upload_black.png";
 import axios from "axios";
 import { API } from "../api";
+import { toast } from "react-toastify";
 
 const Upload = () => {
   const [title, setTitle] = useState("");
@@ -10,10 +10,12 @@ const Upload = () => {
   const [videoFile, setVideoFile] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
   const [message, setMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!title || !description || !status || !videoFile || !thumbnail) {
+      return toast.error("Please fill in all fields");
+    }
 
     try {
       setMessage("Uploading video...");
@@ -33,10 +35,10 @@ const Upload = () => {
         }
       );
       setMessage("");
-      setSuccessMessage("Video uploaded successfully");
+      toast.success("Video uploaded successfully");
     } catch (error) {
       console.error(error);
-      setMessage("Failed to upload video");
+      toast.error("Error uploading video");
     }
   };
 
@@ -129,11 +131,6 @@ const Upload = () => {
             </div>
             {message && (
               <div className="text-red-500 text-sm text-center">{message}</div>
-            )}
-            {successMessage && (
-              <div className="text-green-500 text-sm text-center">
-                {successMessage}
-              </div>
             )}
             {/* Upload Button */}
             <button

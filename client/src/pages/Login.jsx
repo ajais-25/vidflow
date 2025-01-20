@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../features/authSlice";
 import { API } from "../api";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,9 +16,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("Please wait...");
+    if (!email || !password) {
+      return toast.error("Please fill in all fields");
+    }
 
     try {
+      setMessage("Please wait...");
       const response = await axios.post(`${API}/users/login`, {
         email,
         password,
@@ -29,7 +33,8 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
-      setMessage("Invalid email or password");
+      toast.error("Invalid email or password");
+      setMessage("");
     }
   };
 

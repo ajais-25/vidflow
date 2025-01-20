@@ -3,13 +3,13 @@ import Playlist from "../components/playlist/Playlist";
 import axios from "axios";
 import { API } from "../api";
 import PlaylistLoader from "../components/Loader/PlaylistLoader";
+import { toast } from "react-toastify";
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [modalMessage, setModalMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
   const getUserPlaylists = async () => {
@@ -31,7 +31,7 @@ const Playlists = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !description) {
-      setModalMessage("Please fill in all fields");
+      toast.error("Please fill all the fields.");
     } else {
       try {
         const response = await axios.post(`${API}/playlist`, {
@@ -39,6 +39,7 @@ const Playlists = () => {
           description,
         });
         setPlaylists([...playlists, response.data.data]);
+        toast.success("Playlist created successfully");
       } catch (error) {
         console.log(error);
       }
@@ -46,13 +47,12 @@ const Playlists = () => {
       setShowModal(false);
       setName("");
       setDescription("");
-      setModalMessage("");
     }
   };
 
   return (
     <>
-      <div className="container mx-auto dark:bg-gray-900 py-24 px-10 flex flex-col">
+      <div className="dark:bg-gray-900 py-24 px-10 flex flex-col">
         <div className="flex justify-between items-center gap-2 mb-10">
           <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Your Playlists
@@ -121,11 +121,6 @@ const Playlists = () => {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
-                  {modalMessage && (
-                    <div className="text-red-500 text-sm font-medium text-center width-full">
-                      {modalMessage}
-                    </div>
-                  )}
                   <button
                     type="submit"
                     className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
@@ -143,7 +138,7 @@ const Playlists = () => {
             No playlists found
           </p>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1736px]:grid-cols-5 min-[2250px]:grid-cols-6 gap-8 gap-y-12">
           {loading && <PlaylistLoader />}
           {playlists &&
             playlists.map((playlist, index) => (

@@ -23,7 +23,7 @@ const WatchHistory = () => {
   }, []);
 
   return (
-    <div className="container mx-auto py-24 px-4 sm:px-10">
+    <div className="py-24 px-4 sm:px-10">
       <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4 px-4">
         Your History
       </p>
@@ -33,7 +33,7 @@ const WatchHistory = () => {
         </p>
       )}
       {/* Responsive grid layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1736px]:grid-cols-5 min-[2250px]:grid-cols-6 gap-4">
         {watchHistory &&
           watchHistory.map((video) => (
             <VideoCard key={video._id} video={video} />

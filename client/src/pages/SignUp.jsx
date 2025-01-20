@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { API } from "../api";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -14,6 +15,10 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!username || !fullName || !email || !avatar || !password) {
+      return toast.error("Please fill in all fields");
+    }
+
     try {
       setMessage("Please wait...");
       await axios.post(
@@ -40,7 +45,8 @@ const SignUp = () => {
       navigate("/login");
     } catch (error) {
       console.error(error);
-      setMessage("Failed to create an account");
+      toast.error("Failed to create an account");
+      setMessage("");
     }
   };
 
@@ -107,10 +113,14 @@ const SignUp = () => {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <label className="block text-sm font-medium mb-1">
+              <label
+                htmlFor="avatar"
+                className="block text-sm font-medium mb-1"
+              >
                 Your Avatar
               </label>
               <input
+                id="avatar"
                 type="file"
                 className="cursor-pointer mt-1"
                 required
