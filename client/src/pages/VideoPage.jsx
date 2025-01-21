@@ -44,7 +44,7 @@ const VideoPage = () => {
         time={video?.createdAt}
       />
       <VideoDescription description={video?.description} />
-      <CommentSection comments={video?.comments} />
+      <CommentSection />
     </div>
   );
 };

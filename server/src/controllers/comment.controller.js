@@ -1,4 +1,4 @@
-import { isValidObjectId } from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 import { Comment } from "../models/comment.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
@@ -8,9 +8,48 @@ const getVideoComments = async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    const comments = await Comment.find({ video: videoId })
-        .skip(skip)
-        .limit(limit);
+    // const comments = await Comment.find({ video: videoId })
+    //     .skip(skip)
+    //     .limit(limit);
+
+    const comments = await Comment.aggregate([
+        {
+            $match: { video: new mongoose.Types.ObjectId(videoId) },
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+            },
+        },
+        {
+            $unwind: "$owner",
+        },
+        {
+            $project: {
+                content: 1,
+                createdAt: 1,
+                owner: {
+                    _id: 1,
+                    name: 1,
+                    email: 1,
+                    avatar: 1,
+                    username: 1,
+                },
+            },
+        },
+        {
+            $sort: { createdAt: -1 },
+        },
+        {
+            $skip: skip,
+        },
+        {
+            $limit: limit,
+        },
+    ]);
 
     if (!comments) {
         return res

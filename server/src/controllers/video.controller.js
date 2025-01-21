@@ -210,40 +210,6 @@ const getVideoById = async (req, res) => {
             },
         },
         {
-            $lookup: {
-                from: "comments",
-                localField: "_id",
-                foreignField: "video",
-                as: "comments",
-                pipeline: [
-                    {
-                        $lookup: {
-                            from: "users",
-                            localField: "owner",
-                            foreignField: "_id",
-                            as: "owner",
-                        },
-                    },
-                    {
-                        $unwind: "$owner",
-                    },
-                    {
-                        $project: {
-                            __v: 0,
-                            video: 0,
-                            "owner.password": 0,
-                            "owner.email": 0,
-                            "owner.createdAt": 0,
-                            "owner.updatedAt": 0,
-                            "owner.__v": 0,
-                            "owner.refreshToken": 0,
-                            "owner.watchHistory": 0,
-                        },
-                    },
-                ],
-            },
-        },
-        {
             $unwind: "$owner",
         },
         {
