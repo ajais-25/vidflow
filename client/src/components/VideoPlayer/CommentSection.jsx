@@ -33,20 +33,22 @@ const CommentSection = () => {
   };
 
   const getVideoComments = async () => {
-    try {
-      const response = await axios.get(
-        `${API}/comments/${videoId}?page=${page}`
-      );
-      // console.log(response.data.data);
-      const newComments = response.data.data;
-      setComments((prev) => [...prev, ...newComments]);
-      setPage((prev) => prev + 1);
-      if (newComments.length === 0) {
-        setHasMore(false);
+    setTimeout(async () => {
+      try {
+        const response = await axios.get(
+          `${API}/comments/${videoId}?page=${page}`
+        );
+        // console.log(response.data.data);
+        const newComments = response.data.data;
+        setComments((prev) => [...prev, ...newComments]);
+        setPage((prev) => prev + 1);
+        if (newComments.length === 0) {
+          setHasMore(false);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    }, 500);
   };
 
   useEffect(() => {
