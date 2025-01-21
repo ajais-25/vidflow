@@ -83,8 +83,6 @@ const getPlaylistById = async (req, res) => {
         return res.status(400).json({ message: "Not a valid playlist id" });
     }
 
-    // const playlist = await Playlist.findById(playlistId);
-
     const playlist = await Playlist.aggregate([
         {
             $match: { _id: new mongoose.Types.ObjectId(playlistId) },
@@ -222,8 +220,6 @@ const deletePlaylist = async (req, res) => {
     }
 
     const deletedPlaylist = await Playlist.deleteOne({ _id: playlistId });
-
-    console.log(deletedPlaylist);
 
     if (deletedPlaylist.deletedCount !== 1) {
         return res.status(500).json({ message: "Playlist not found" });

@@ -27,7 +27,6 @@ const generateAccessAndRefreshTokens = async (userId) => {
 
 const registerUser = async (req, res) => {
     const { fullName, email, username, password } = req.body;
-    console.log(fullName, email, username);
 
     if (!fullName || !email || !username || !password) {
         return res.status(400).json({ message: "All fields are required" });
@@ -44,8 +43,6 @@ const registerUser = async (req, res) => {
     if (req.files.avatar) {
         avatarLocalPath = req.files.avatar[0].path;
     }
-
-    console.log(avatarLocalPath);
 
     const avatar = await uploadOnCloudinary(avatarLocalPath);
 
@@ -202,8 +199,6 @@ const changeCurrentPassword = async (req, res) => {
 
     const user = await User.findById(req.user?._id);
 
-    console.log(user);
-
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
 
     if (!isPasswordCorrect) {
@@ -255,8 +250,6 @@ const updateUserAvatar = async (req, res) => {
         return res.status(400).json({ message: "Avatar file is required" });
     }
 
-    console.log(avatarLocalPath);
-
     if (req.user.avatar) {
         const oldLink = req.user.avatar.split("/");
         const publicId = oldLink[oldLink.length - 1].split(".")[0];
@@ -291,8 +284,6 @@ const getUserChannelProfile = async (req, res) => {
     if (!username?.trim()) {
         return res.status(400).json({ message: "User id is missing" });
     }
-
-    // console.log(`Username: ${username}`);
 
     const channel = await User.aggregate([
         {

@@ -136,20 +136,14 @@ const publishAVideo = async (req, res) => {
         videoFileLocalPath = req.files.videoFile[0].path;
     }
 
-    // console.log(videoFileLocalPath);
-
     let thumbnailLocalPath;
 
     if (req.files.thumbnail) {
         thumbnailLocalPath = req.files.thumbnail[0].path;
     }
 
-    // console.log(thumbnailLocalPath);
-
     const videoFile = await uploadOnCloudinary(videoFileLocalPath);
     const thumbnail = await uploadOnCloudinary(thumbnailLocalPath);
-
-    // console.log(videoFile);
 
     if (!videoFile || !thumbnail) {
         return res
@@ -316,8 +310,6 @@ const updateVideo = async (req, res) => {
         return res.status(500).json({ message: "thumbnail file is required" });
     }
 
-    console.log(thumbnailLocalPath);
-
     const video = await Video.findById(videoId);
 
     const oldLink = video.thumbnail.split("/");
@@ -356,20 +348,14 @@ const deleteVideo = async (req, res) => {
 
     const video = await Video.findByIdAndDelete(videoId);
 
-    console.log(video);
-
     const videoOldLink = video.videoFile.split("/");
     const videoPublicId = videoOldLink[videoOldLink.length - 1].split(".")[0];
-    console.log(videoPublicId);
-    const deletedVideo = await deleteVideoFromCloudinary(videoPublicId);
-
-    console.log(deletedVideo);
+    await deleteVideoFromCloudinary(videoPublicId);
 
     const thumbnailOldLink = video.thumbnail.split("/");
     const thumbnailPublicId =
         thumbnailOldLink[thumbnailOldLink.length - 1].split(".")[0];
-    console.log(thumbnailPublicId);
-    await deleteFromCloudinary(thumbnailPublicId);
+    await deleteImageFromCloudinary(thumbnailPublicId);
 
     return res
         .status(200)
