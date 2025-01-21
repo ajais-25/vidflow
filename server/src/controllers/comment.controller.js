@@ -4,13 +4,9 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 const getVideoComments = async (req, res) => {
     const { videoId } = req.params;
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 5 } = req.query;
 
     const skip = (page - 1) * limit;
-
-    // const comments = await Comment.find({ video: videoId })
-    //     .skip(skip)
-    //     .limit(limit);
 
     const comments = await Comment.aggregate([
         {
@@ -84,6 +80,36 @@ const addComment = async (req, res) => {
         owner: req.user._id,
     });
 
+    const commentWithOwner = await Comment.aggregate([
+        {
+            $match: { _id: comment._id },
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+            },
+        },
+        {
+            $unwind: "$owner",
+        },
+        {
+            $project: {
+                content: 1,
+                createdAt: 1,
+                owner: {
+                    _id: 1,
+                    name: 1,
+                    email: 1,
+                    avatar: 1,
+                    username: 1,
+                },
+            },
+        },
+    ]);
+
     if (!comment) {
         return res
             .status(500)
@@ -92,7 +118,13 @@ const addComment = async (req, res) => {
 
     return res
         .status(200)
-        .json(new ApiResponse(200, comment, "Comment created successfully"));
+        .json(
+            new ApiResponse(
+                200,
+                commentWithOwner[0],
+                "Comment created successfully"
+            )
+        );
 };
 
 const updateComment = async (req, res) => {

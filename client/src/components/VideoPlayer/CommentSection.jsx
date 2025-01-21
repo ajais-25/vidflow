@@ -4,12 +4,16 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getTimeDifference } from "../../utils";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { toast } from "react-toastify";
 
 const CommentSection = () => {
   const [newComment, setNewComment] = useState("");
   const { videoId } = useParams();
   const user = useSelector((state) => state.auth.user);
   const [comments, setComments] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const handleCommentSubmit = async () => {
     const content = newComment.trim();
@@ -19,8 +23,10 @@ const CommentSection = () => {
       const response = await axios.post(`${API}/comments/${videoId}`, {
         content,
       });
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setNewComment("");
+      setComments((prev) => [response.data.data, ...prev]);
+      toast.success("Comment added successfully");
     } catch (error) {
       console.log(error);
     }
@@ -28,9 +34,16 @@ const CommentSection = () => {
 
   const getVideoComments = async () => {
     try {
-      const response = await axios.get(`${API}/comments/${videoId}`);
+      const response = await axios.get(
+        `${API}/comments/${videoId}?page=${page}`
+      );
       // console.log(response.data.data);
-      setComments(response.data.data);
+      const newComments = response.data.data;
+      setComments((prev) => [...prev, ...newComments]);
+      setPage((prev) => prev + 1);
+      if (newComments.length === 0) {
+        setHasMore(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -73,33 +86,41 @@ const CommentSection = () => {
       </div>
 
       {/* Comments List */}
-      <div className="space-y-4">
-        {comments &&
-          comments.map((comment) => (
-            <div key={comment._id} className="flex items-start">
-              <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700">
-                <img
-                  src={comment.owner.avatar}
-                  alt=""
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-              </div>
-              <div className="ml-4">
-                <div className="flex gap-2 items-center">
-                  <p className="font-bold text-gray-900 dark:text-gray-100">
-                    @{comment.owner.username}
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-300">
-                    {getTimeDifference(comment.createdAt)}
+      <InfiniteScroll
+        dataLength={comments.length}
+        next={getVideoComments}
+        hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
+        scrollThreshold={1} // Trigger API call when 100% scrolled
+      >
+        <div className="space-y-4">
+          {comments &&
+            comments.map((comment) => (
+              <div key={comment._id} className="flex items-start">
+                <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700">
+                  <img
+                    src={comment.owner.avatar}
+                    alt=""
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                </div>
+                <div className="ml-4">
+                  <div className="flex gap-2 items-center">
+                    <p className="font-bold text-gray-900 dark:text-gray-100">
+                      @{comment.owner.username}
+                    </p>
+                    <p className="text-gray-500 dark:text-gray-300">
+                      {getTimeDifference(comment.createdAt)}
+                    </p>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {comment.content}
                   </p>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {comment.content}
-                </p>
               </div>
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
+      </InfiniteScroll>
     </div>
   );
 };
