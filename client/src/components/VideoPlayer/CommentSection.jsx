@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { getTimeDifference } from "../../utils";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { toast } from "react-toastify";
+import CommentsLoader from "../Loader/CommentsLoader";
 
 const CommentSection = () => {
   const [newComment, setNewComment] = useState("");
@@ -14,6 +15,7 @@ const CommentSection = () => {
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleCommentSubmit = async () => {
     const content = newComment.trim();
@@ -33,6 +35,7 @@ const CommentSection = () => {
   };
 
   const getVideoComments = async () => {
+    setLoading(true);
     setTimeout(async () => {
       try {
         const response = await axios.get(
@@ -41,12 +44,14 @@ const CommentSection = () => {
         // console.log(response.data.data);
         const newComments = response.data.data;
         setComments((prev) => [...prev, ...newComments]);
+        setLoading(false);
         setPage((prev) => prev + 1);
         if (newComments.length === 0) {
           setHasMore(false);
         }
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     }, 500);
   };
@@ -92,7 +97,6 @@ const CommentSection = () => {
         dataLength={comments.length}
         next={getVideoComments}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
         scrollThreshold={1} // Trigger API call when 100% scrolled
       >
         <div className="space-y-4">
@@ -121,6 +125,7 @@ const CommentSection = () => {
                 </div>
               </div>
             ))}
+          {loading && <CommentsLoader />}
         </div>
       </InfiniteScroll>
     </div>
