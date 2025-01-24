@@ -12,7 +12,7 @@ const LikedVideos = () => {
       const response = await axios.get(`${API}/likes/videos`);
       //   console.log(response.data.data);
       setLikedVideos(response.data.data);
-      setMessage("No videos found.");
+      setMessage("No videos found");
     } catch (error) {
       console.error(error);
     }

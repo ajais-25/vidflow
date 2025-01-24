@@ -8,7 +8,7 @@ const DashboardBottom = ({ tabSelected, channelVideos, channelPlaylists }) => {
       {tabSelected === "videos" ? (
         <>
           {channelVideos && channelVideos.length === 0 && (
-            <div className="col-span-4 w-screen text-center text-lg text-gray-500 dark:text-gray-400">
+            <div className="col-span-4 w-full text-center text-lg text-gray-500 dark:text-gray-400">
               No videos found
             </div>
           )}
@@ -24,7 +24,7 @@ const DashboardBottom = ({ tabSelected, channelVideos, channelPlaylists }) => {
       ) : (
         <>
           {channelPlaylists && channelPlaylists.length === 0 && (
-            <div className="col-span-4 w-screen text-center text-lg text-gray-500 dark:text-gray-400">
+            <div className="col-span-4 w-full text-center text-lg text-gray-500 dark:text-gray-400">
               No playlists found
             </div>
           )}
