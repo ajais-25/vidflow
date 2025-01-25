@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { API } from "../api";
 import { toast } from "react-toastify";
@@ -10,6 +10,9 @@ const Upload = () => {
   const [videoFile, setVideoFile] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
   const [message, setMessage] = useState("");
+
+  const thumbnailRef = useRef(null);
+  const videoRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +37,14 @@ const Upload = () => {
           },
         }
       );
+      setTitle("");
+      setDescription("");
+      setStatus("");
+      setVideoFile(null);
+      setThumbnail(null);
+      thumbnailRef.current.value = "";
+      videoRef.current.value = "";
+      setStatus("");
       setMessage("");
       toast.success("Video uploaded successfully");
     } catch (error) {
@@ -58,6 +69,7 @@ const Upload = () => {
                 className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
                 placeholder="Enter video title"
                 required
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
@@ -71,6 +83,7 @@ const Upload = () => {
                 className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
                 placeholder="Add description..."
                 required
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
@@ -83,6 +96,7 @@ const Upload = () => {
                   type="file"
                   className="cursor-pointer mt-1"
                   required
+                  ref={videoRef}
                   onChange={(e) => setVideoFile(e.target.files[0])}
                 />
               </div>
@@ -94,6 +108,7 @@ const Upload = () => {
                   type="file"
                   className="cursor-pointer mt-1"
                   required
+                  ref={thumbnailRef}
                   onChange={(e) => setThumbnail(e.target.files[0])}
                 />
               </div>
