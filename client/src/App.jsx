@@ -116,15 +116,15 @@ const App = () => {
               </Suspense>
             }
           />
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={<Loading />}>
-                <NotFound />
-              </Suspense>
-            }
-          />
         </Route>
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<Loading />}>
+              <NotFound />
+            </Suspense>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
