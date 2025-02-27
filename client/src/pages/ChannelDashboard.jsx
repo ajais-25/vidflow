@@ -39,7 +39,7 @@ const ChannelDashboard = () => {
 
   const getChannelPlaylists = async () => {
     try {
-      const response = await axios.get(`${API}/playlist/user/${user?._id}`);
+      const response = await axios.get(`${API}/playlist/user/${username}`);
       // console.log(response.data.data);
       setChannelPlaylists(response.data.data);
     } catch (err) {

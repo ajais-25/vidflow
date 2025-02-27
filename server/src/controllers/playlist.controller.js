@@ -1,6 +1,7 @@
 import mongoose, { isValidObjectId } from "mongoose";
 import { Playlist } from "../models/playlist.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { User } from "../models/user.model.js";
 
 const createPlaylist = async (req, res) => {
     const { name, description } = req.body;
@@ -38,13 +39,17 @@ const createPlaylist = async (req, res) => {
 };
 
 const getUserPlaylists = async (req, res) => {
-    const { userId } = req.params;
+    const { username } = req.params;
 
-    if (!userId?.trim()) {
+    if (!username?.trim()) {
         return res.status(400).json({ message: "user Id is missing" });
     }
 
-    const userPlaylists = await Playlist.find({ owner: userId });
+    const user = await User.findOne({ username });
+
+    const userPlaylists = await Playlist.find({ owner: user._id }).populate(
+        "videos"
+    );
 
     return res
         .status(200)
