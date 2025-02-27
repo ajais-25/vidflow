@@ -45,7 +45,7 @@ const SignUp = () => {
       navigate("/login");
     } catch (error) {
       console.error(error);
-      toast.error("Failed to create an account");
+      toast.error(error.response.data.message);
       setMessage("");
     }
   };

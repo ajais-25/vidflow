@@ -53,7 +53,9 @@ const VideoCard = ({ isChannelDashboard = false, video }) => {
           )}
           <div>
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-              {video?.title || "Video Title"}
+              {video?.title.length < 20
+                ? video?.title
+                : video?.title.slice(0, 20) + "..." || "Video Title"}
             </h2>
             {!isChannelDashboard ? (
               <Link

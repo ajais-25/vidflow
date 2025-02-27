@@ -11,11 +11,14 @@ const Upload = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [message, setMessage] = useState("");
 
+  const [isUploading, setIsUploading] = useState(false);
+
   const thumbnailRef = useRef(null);
   const videoRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsUploading(true);
     if (!title || !description || !status || !videoFile || !thumbnail) {
       return toast.error("Please fill in all fields");
     }
@@ -47,9 +50,12 @@ const Upload = () => {
       setStatus("");
       setMessage("");
       toast.success("Video uploaded successfully");
+      setIsUploading(false);
     } catch (error) {
       console.error(error);
       toast.error("Error uploading video");
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -150,6 +156,7 @@ const Upload = () => {
             {/* Upload Button */}
             <button
               type="submit"
+              disabled={isUploading ? true : false}
               className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
             >
               Upload

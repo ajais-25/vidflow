@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")).render(
       newestOnTop={false}
       closeOnClick={false}
       rtl={false}
-      pauseOnFocusLoss
+      pauseOnFocusLoss={false}
       draggable
       pauseOnHover={false}
       theme="light"
