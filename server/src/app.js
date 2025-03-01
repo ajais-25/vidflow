@@ -34,4 +34,8 @@ app.use("/api/v1/comments", commentRouter);
 app.use("/api/v1/videos", videoRouter);
 app.use("/api/v1/likes", likeRouter);
 
+app.get("/", (req, res) => {
+    res.send("<h1>Server is Running</h1>");
+});
+
 export { app };
