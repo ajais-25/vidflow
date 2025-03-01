@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AddToPlaylistModal from "../Playlist/AddToPlaylistModal";
+import AddToPlaylistModal from "../PlaylistComp/AddToPlaylistModal";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { getTimeDifference } from "../../utils";
 import axios from "axios";

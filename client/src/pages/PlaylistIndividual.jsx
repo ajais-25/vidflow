@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import LeftPart from "../components/Playlist/LeftPart";
-import RightPart from "../components/Playlist/RightPart";
+import LeftPart from "../components/PlaylistComp/LeftPart";
+import RightPart from "../components/PlaylistComp/RightPart";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API } from "../api";

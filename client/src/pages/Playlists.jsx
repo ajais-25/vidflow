@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Playlist from "../components/playlist/Playlist";
+import Playlist from "../components/PlaylistComp/Playlist";
 import axios from "axios";
 import { API } from "../api";
 import PlaylistLoader from "../components/Loader/PlaylistLoader";
