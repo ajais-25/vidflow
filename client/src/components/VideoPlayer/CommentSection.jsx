@@ -53,7 +53,7 @@ const CommentSection = () => {
         console.log(error);
         setLoading(false);
       }
-    }, 500);
+    }, 300);
   };
 
   useEffect(() => {

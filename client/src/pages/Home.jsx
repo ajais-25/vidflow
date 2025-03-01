@@ -28,7 +28,7 @@ const Home = () => {
         console.error("Error fetching videos: ", error);
         setLoading(false);
       }
-    }, 500);
+    }, 300);
   };
 
   useEffect(() => {

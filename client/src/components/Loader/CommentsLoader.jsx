@@ -2,15 +2,15 @@ import React from "react";
 
 const Skeleton = () => {
   return (
-    <div className="flex items-start">
-      <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-      <div className="ml-4">
-        <div className="flex gap-2 items-center">
-          <p className="font-bold text-gray-900 dark:text-gray-100">@johndoe</p>
-          <p className="text-gray-500 dark:text-gray-300">1 hour ago</p>
+    <div className="flex w-52 flex-col gap-4">
+      <div className="flex items-center gap-4">
+        <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
+        <div className="flex flex-col gap-4">
+          <div className="skeleton h-4 w-20"></div>
+          <div className="skeleton h-4 w-28"></div>
         </div>
-        <p className="text-gray-600 dark:text-gray-300">comment</p>
       </div>
+      {/* <div className="skeleton h-32 w-full"></div> */}
     </div>
   );
 };
