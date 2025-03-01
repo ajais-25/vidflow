@@ -1,6 +1,6 @@
 import React from "react";
 import VideoCard from "../VideoCard";
-import Playlist from "../playlist/Playlist";
+import Playlist from "../PlaylistComp/Playlist";
 
 const DashboardBottom = ({ tabSelected, channelVideos, channelPlaylists }) => {
   return (
