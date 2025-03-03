@@ -3,6 +3,7 @@
     {
       "source": "/api/v1/:path*",
       "destination": "https://vidflow-ii85.onrender.com/api/v1/:path*"
-    }
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
