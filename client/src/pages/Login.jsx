@@ -82,13 +82,10 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="flex items-center justify-between">
-              <a
-                href="#"
-                className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-              >
-                Forgot password?
-              </a>
+            <div className="text-sm bg-gray-200 rounded-md p-2 text-gray-500 dark:text-gray-400">
+              Demo credentials :-
+              <div>Email: dalesteyn@gmail.com</div>
+              <div>Password: 1234</div>
             </div>
             {message && (
               <div className="text-red-500 text-sm font-medium text-center width-full">
