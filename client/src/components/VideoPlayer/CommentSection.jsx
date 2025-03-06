@@ -60,6 +60,10 @@ const CommentSection = () => {
     getVideoComments();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="max-w-full mt-4 p-4 rounded-lg">
       <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">

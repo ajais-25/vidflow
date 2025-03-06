@@ -40,7 +40,11 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getAllVideos();
+    getAllVideos(true); // Ensure videos are fetched initially
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   const handleSearchResults = (results) => {
