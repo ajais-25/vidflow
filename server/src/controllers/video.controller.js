@@ -8,6 +8,74 @@ import {
 } from "../utils/cloudinary.js";
 import mongoose from "mongoose";
 
+const getVideosBySearchQuery = async (req, res) => {
+    const { query } = req.query;
+
+    if (!query?.trim()) {
+        return res.status(500).json({ message: "Query is missing" });
+    }
+
+    const videos = await Video.aggregate([
+        {
+            $match: {
+                status: "public",
+                $or: [
+                    {
+                        title: {
+                            $regex: query,
+                            $options: "i",
+                        },
+                    },
+                    {
+                        description: {
+                            $regex: query,
+                            $options: "i",
+                        },
+                    },
+                ],
+            },
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+            },
+        },
+        {
+            $unwind: "$owner",
+        },
+        {
+            $project: {
+                "owner.password": 0,
+                "owner.email": 0,
+                "owner.createdAt": 0,
+                "owner.updatedAt": 0,
+                "owner.__v": 0,
+                "owner.refreshToken": 0,
+                "owner.watchHistory": 0,
+            },
+        },
+        {
+            $sort: {
+                views: -1,
+                createdAt: -1,
+            },
+        },
+    ]);
+
+    if (!videos) {
+        return res
+            .status(500)
+            .json({ message: "Something went wrong while fetching videos" });
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, videos, "Videos fetched Successfully"));
+};
+
 const getAllVideos = async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
 
@@ -359,6 +427,7 @@ const viewVideo = async (req, res) => {
 };
 
 export {
+    getVideosBySearchQuery,
     getAllVideos,
     getVideosByUsername,
     publishAVideo,

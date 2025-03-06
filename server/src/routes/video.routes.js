@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+    getVideosBySearchQuery,
     deleteVideo,
     getAllVideos,
     getVideosByUsername,
@@ -27,6 +28,8 @@ router.route("/").post(
     ]),
     publishAVideo
 );
+
+router.route("/search").get(getVideosBySearchQuery);
 
 router.route("/").get(getAllVideos);
 router.route("/u/:username").get(getVideosByUsername);
