@@ -20,6 +20,7 @@ const Upload = () => {
     e.preventDefault();
     setIsUploading(true);
     if (!title || !description || !status || !videoFile || !thumbnail) {
+      setIsUploading(false);
       return toast.error("Please fill in all fields");
     }
 
@@ -50,7 +51,6 @@ const Upload = () => {
       setStatus("");
       setMessage("");
       toast.success("Video uploaded successfully");
-      setIsUploading(false);
     } catch (error) {
       console.error(error);
       toast.error("Error uploading video");
@@ -102,6 +102,7 @@ const Upload = () => {
                   type="file"
                   className="cursor-pointer mt-1"
                   required
+                  accept="video/*"
                   ref={videoRef}
                   onChange={(e) => setVideoFile(e.target.files[0])}
                 />
@@ -114,6 +115,7 @@ const Upload = () => {
                   type="file"
                   className="cursor-pointer mt-1"
                   required
+                  accept="image/*"
                   ref={thumbnailRef}
                   onChange={(e) => setThumbnail(e.target.files[0])}
                 />
@@ -122,33 +124,21 @@ const Upload = () => {
 
             {/* Status */}
             <div>
-              <span className="block text-sm font-medium mb-1">
+              <label className="block text-sm font-medium mb-1">
                 Select Status*
-              </span>
-              <div className="flex gap-4">
-                <label className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="status"
-                    value="public"
-                    required
-                    className="cursor-pointer"
-                    onChange={(e) => setStatus(e.target.value)}
-                  />
-                  <span className="ml-2">Public</span>
-                </label>
-                <label className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="status"
-                    value="private"
-                    required
-                    className="cursor-pointer"
-                    onChange={(e) => setStatus(e.target.value)}
-                  />
-                  <span className="ml-2">Private</span>
-                </label>
-              </div>
+              </label>
+              <select
+                className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+                required
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="" disabled>
+                  Select status
+                </option>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
             </div>
             {message && (
               <div className="text-red-500 text-sm text-center">{message}</div>
