@@ -200,29 +200,6 @@ const Navbar = ({ toggleSidebar }) => {
                 {/* Quick Actions */}
                 <div className="p-4 space-y-2">
                   <Link
-                    to={`/c/${user?.username}`}
-                    className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200"
-                    onClick={() => setIsProfileOpen(false)}
-                  >
-                    <svg
-                      className="w-4 h-4 text-gray-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                    <span className="text-gray-700 dark:text-gray-300">
-                      View Profile
-                    </span>
-                  </Link>
-
-                  <Link
                     to="/upload"
                     className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200"
                     onClick={() => setIsProfileOpen(false)}
