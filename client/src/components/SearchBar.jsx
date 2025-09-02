@@ -40,24 +40,50 @@ const SearchBar = ({ onSearchResults }) => {
   };
 
   return (
-    <div className="flex justify-center my-4">
-      <form onSubmit={handleSearch} className="flex w-full max-w-lg">
-        <input
-          type="text"
-          placeholder="Search videos..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="flex-grow p-2 border border-gray-300 rounded-l-md focus:outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"
-        />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className={`p-2 bg-blue-500 text-white rounded-r-md ${
-            isLoading ? "cursor-not-allowed bg-gray-400" : "hover:bg-blue-600"
-          }`}
-        >
-          {isLoading ? "Searching..." : "Search"}
-        </button>
+    <div className="relative w-full max-w-2xl mx-auto">
+      <form onSubmit={handleSearch} className="relative group">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search for videos, topics..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full py-4 pl-6 pr-32 text-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-2 border-blue-200 dark:border-blue-700 rounded-full focus:outline-none focus:border-blue-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-gray-800 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 shadow-lg focus:shadow-xl group-hover:shadow-xl"
+          />
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              isLoading
+                ? "bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white shadow-lg hover:shadow-xl active:scale-95"
+            }`}
+          >
+            {isLoading ? (
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                <span>Searching</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+                <span>Search</span>
+              </div>
+            )}
+          </button>
+        </div>
       </form>
     </div>
   );
