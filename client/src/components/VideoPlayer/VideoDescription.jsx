@@ -8,27 +8,72 @@ const VideoDescription = ({ description }) => {
   };
 
   return (
-    <div className="mt-4">
-      <span className="block">Description:</span>
-      {description?.length > 100 && (
-        <button
-          onClick={toggleDescription}
-          className="text-sm text-blue-500 dark:text-blue-400"
-        >
-          {isExpanded ? "Show less" : "Show more"}
-        </button>
-      )}
+    <div className="py-4">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <div className="w-1 h-6 bg-gradient-to-b from-blue-500 to-emerald-500 rounded-full"></div>
+          <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">
+            Description
+          </h3>
+        </div>
+        {description?.length > 100 && (
+          <button
+            onClick={toggleDescription}
+            className="flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-300"
+          >
+            {isExpanded ? (
+              <>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 15l7-7 7 7"
+                  />
+                </svg>
+                Show less
+              </>
+            ) : (
+              <>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+                Show more
+              </>
+            )}
+          </button>
+        )}
+      </div>
+
       <div
-        className={`mt-2 transition-max-height duration-500 ease-in-out ${
-          isExpanded ? "max-h-96" : "max-h-12"
+        className={`transition-all duration-500 ease-in-out overflow-hidden ${
+          isExpanded ? "max-h-96" : "max-h-20"
         }`}
       >
-        <p className="text-sm text-gray-700 dark:text-gray-300 bg-blue-100 dark:bg-blue-900 p-2 px-4 rounded-lg">
-          {isExpanded
-            ? description
-            : description?.slice(0, 100) +
-              (description?.length > 100 ? "..." : "")}
-        </p>
+        <div className="bg-gradient-to-br from-blue-50 to-emerald-50 dark:from-blue-900/20 dark:to-emerald-900/20 border border-blue-200/50 dark:border-blue-700/50 rounded-xl p-4">
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+            {isExpanded
+              ? description || "No description available."
+              : description?.slice(0, 100) +
+                  (description?.length > 100 ? "..." : "") ||
+                "No description available."}
+          </p>
+        </div>
       </div>
     </div>
   );

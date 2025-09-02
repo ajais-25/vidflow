@@ -16,38 +16,75 @@ const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
   };
 
   return (
-    <div className="flex justify-between items-center mt-4">
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 border-b border-gray-200/50 dark:border-gray-700/50 pb-4">
       <Link
         to={`/c/${owner?.username}`}
-        className="flex items-center hover:underline"
+        className="flex items-center group transition-all duration-300 hover:scale-105"
       >
-        <div className="w-10 h-10 rounded-full bg-gray-400 dark:bg-gray-600">
+        <div className="w-12 h-12 rounded-full ring-2 ring-blue-100 dark:ring-blue-800 group-hover:ring-blue-200 dark:group-hover:ring-blue-700 transition-all duration-300 overflow-hidden">
           <img
             src={owner?.avatar || ""}
-            alt=""
-            className="w-10 h-10 rounded-full object-cover"
+            alt="Channel Avatar"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="ml-4">
-          <h3 className="text-sm font-semibold dark:text-white">
+          <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
             {owner?.fullName || "John Doe"}
           </h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
             {subscribers?.length} subscribers
           </p>
         </div>
       </Link>
-      <div className="flex justify-end items-center mt-4 mb-4 sm:mt-0">
+      <div className="flex justify-start sm:justify-end items-center">
         {
           // If the user is the owner of the video, don't show the subscribe button
           user?._id === owner?._id ? null : (
             <button
-              className={`${
-                isSubscribed ? "bg-gray-500" : "bg-red-500"
-              } text-white transition-all duration-300 active:scale-95 px-4 py-2 rounded-lg mr-2`}
+              className={`group flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl ${
+                isSubscribed
+                  ? "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-2 border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600"
+                  : "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-2 border-transparent"
+              }`}
               onClick={handleSubscribe}
             >
-              {isSubscribed ? "Unsubscribe" : "Subscribe"}
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {isSubscribed ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                )}
+              </svg>
+              {isSubscribed ? "Subscribed" : "Subscribe"}
             </button>
           )
         }

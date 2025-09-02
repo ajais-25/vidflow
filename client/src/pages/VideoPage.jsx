@@ -30,21 +30,36 @@ const VideoPage = () => {
   }, []);
 
   return (
-    <div className="p-4 max-w-2xl sm:mt-20 mx-auto rounded-lg">
-      <VideoPlayer videoId={videoId} video={video} />
-      <VideoInfo
-        owner={video?.owner}
-        subscribers={video?.subscribers}
-        isSubscribed={isSubscribed}
-        setIsSubscribed={setIsSubscribed}
-      />
-      <VideoStats
-        videoId={videoId}
-        views={video?.views}
-        time={video?.createdAt}
-      />
-      <VideoDescription description={video?.description} />
-      <CommentSection />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <div className="pt-20 pb-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Main Video Section */}
+          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 overflow-hidden mb-6">
+            <VideoPlayer videoId={videoId} video={video} />
+          </div>
+
+          {/* Video Info and Stats Section */}
+          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 p-6 mb-6">
+            <VideoInfo
+              owner={video?.owner}
+              subscribers={video?.subscribers}
+              isSubscribed={isSubscribed}
+              setIsSubscribed={setIsSubscribed}
+            />
+            <VideoStats
+              videoId={videoId}
+              views={video?.views}
+              time={video?.createdAt}
+            />
+            <VideoDescription description={video?.description} />
+          </div>
+
+          {/* Comments Section */}
+          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 overflow-hidden">
+            <CommentSection />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
