@@ -86,12 +86,12 @@ const Upload = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 transition-all duration-500">
       <div className="pt-20 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full mb-4">
               <svg
                 className="w-8 h-8 text-white"
                 fill="none"
@@ -106,16 +106,16 @@ const Upload = () => {
                 />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-2">
               Upload Your Video
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 dark:text-gray-300">
               Share your content with the world
             </p>
           </div>
 
           {/* Upload Form */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-blue-200 dark:border-blue-700 overflow-hidden">
             <div className="p-8">
               <form className="space-y-6" onSubmit={handleSubmit}>
                 {/* Title Input */}
@@ -125,9 +125,9 @@ const Upload = () => {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl 
-                             bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white 
-                             focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                    className="w-full px-4 py-3 border border-blue-200 dark:border-blue-700 rounded-xl 
+                             bg-slate-50 dark:bg-gray-700 text-gray-900 dark:text-white 
+                             focus:ring-2 focus:ring-blue-500 focus:border-emerald-400 dark:focus:border-emerald-500
                              transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
                     placeholder="Enter an engaging title for your video"
                     required
@@ -143,9 +143,9 @@ const Upload = () => {
                   </label>
                   <textarea
                     rows="4"
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl 
-                             bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white 
-                             focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                    className="w-full px-4 py-3 border border-blue-200 dark:border-blue-700 rounded-xl 
+                             bg-slate-50 dark:bg-gray-700 text-gray-900 dark:text-white 
+                             focus:ring-2 focus:ring-blue-500 focus:border-emerald-400 dark:focus:border-emerald-500
                              transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400 resize-none"
                     placeholder="Tell viewers about your video..."
                     required
@@ -174,13 +174,13 @@ const Upload = () => {
                         className={`border-2 border-dashed rounded-xl p-6 text-center transition-all duration-200
                                     ${
                                       videoFile
-                                        ? "border-green-400 bg-green-50 dark:bg-green-900/20"
-                                        : "border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 bg-gray-50 dark:bg-gray-700"
+                                        ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-900/20"
+                                        : "border-blue-200 dark:border-blue-700 hover:border-blue-400 dark:hover:border-blue-500 bg-slate-50 dark:bg-gray-700"
                                     }`}
                       >
                         <svg
                           className={`mx-auto h-8 w-8 mb-2 ${
-                            videoFile ? "text-green-500" : "text-gray-400"
+                            videoFile ? "text-emerald-500" : "text-blue-400"
                           }`}
                           fill="none"
                           stroke="currentColor"
@@ -196,13 +196,13 @@ const Upload = () => {
                         <p
                           className={`text-sm font-medium ${
                             videoFile
-                              ? "text-green-600 dark:text-green-400"
-                              : "text-gray-600 dark:text-gray-400"
+                              ? "text-emerald-600 dark:text-emerald-400"
+                              : "text-blue-600 dark:text-blue-400"
                           }`}
                         >
                           {videoFile ? videoFile.name : "Click to upload video"}
                         </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                           MP4, MOV, AVI up to 2GB
                         </p>
                       </div>
@@ -227,8 +227,8 @@ const Upload = () => {
                         className={`border-2 border-dashed rounded-xl p-6 text-center transition-all duration-200 relative overflow-hidden
                                     ${
                                       thumbnail
-                                        ? "border-green-400 bg-green-50 dark:bg-green-900/20"
-                                        : "border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 bg-gray-50 dark:bg-gray-700"
+                                        ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-900/20"
+                                        : "border-blue-200 dark:border-blue-700 hover:border-blue-400 dark:hover:border-blue-500 bg-slate-50 dark:bg-gray-700"
                                     }`}
                       >
                         {thumbnailPreview ? (
@@ -247,7 +247,7 @@ const Upload = () => {
                         ) : (
                           <>
                             <svg
-                              className="mx-auto h-8 w-8 text-gray-400 mb-2"
+                              className="mx-auto h-8 w-8 text-blue-400 mb-2"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -259,10 +259,10 @@ const Upload = () => {
                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                               />
                             </svg>
-                            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                            <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
                               Click to upload thumbnail
                             </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                               JPG, PNG up to 10MB
                             </p>
                           </>
@@ -278,9 +278,9 @@ const Upload = () => {
                     Privacy Setting *
                   </label>
                   <select
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl 
-                             bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white 
-                             focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                    className="w-full px-4 py-3 border border-blue-200 dark:border-blue-700 rounded-xl 
+                             bg-slate-50 dark:bg-gray-700 text-gray-900 dark:text-white 
+                             focus:ring-2 focus:ring-blue-500 focus:border-emerald-400 dark:focus:border-emerald-500
                              transition-all duration-200 cursor-pointer"
                     required
                     value={status}
@@ -303,13 +303,13 @@ const Upload = () => {
                       <span className="text-blue-600 dark:text-blue-400 font-medium">
                         {message}
                       </span>
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-slate-600 dark:text-slate-400">
                         {uploadProgress}%
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div className="w-full bg-blue-100 dark:bg-blue-900/30 rounded-full h-2">
                       <div
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-300"
+                        className="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${uploadProgress}%` }}
                       ></div>
                     </div>
@@ -323,8 +323,8 @@ const Upload = () => {
                   className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-200 
                             ${
                               isUploading
-                                ? "bg-gray-400 cursor-not-allowed"
-                                : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
+                                ? "bg-slate-400 cursor-not-allowed"
+                                : "bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
                             }`}
                 >
                   {isUploading ? (

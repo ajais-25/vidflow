@@ -143,15 +143,15 @@ const Sidebar = ({ isOpen }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-72 bg-white/95 backdrop-blur-md dark:bg-gray-900/95 z-50 shadow-xl border-r border-gray-200 dark:border-gray-700 h-full transition-all duration-300 transform scrollbar-thin overflow-y-auto ${
+      className={`fixed top-0 left-0 w-72 bg-gradient-to-b from-slate-50/95 to-blue-50/95 dark:from-gray-900/95 dark:to-gray-800/95 backdrop-blur-xl z-50 shadow-xl border-r border-blue-200/30 dark:border-blue-700/30 h-full transition-all duration-300 transform scrollbar-thin overflow-y-auto ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
       style={{ top: "4rem" }}
     >
       {/* User Profile Section */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-6 border-b border-blue-200/30 dark:border-blue-700/30">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-emerald-500 flex items-center justify-center shadow-md">
             <span className="text-white font-semibold text-sm">
               {user?.username?.charAt(0).toUpperCase() || "U"}
             </span>
@@ -177,8 +177,8 @@ const Sidebar = ({ isOpen }) => {
                 className={({ isActive }) =>
                   `flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
                     isActive
-                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400"
+                      ? "bg-gradient-to-r from-blue-500 to-emerald-500 text-white shadow-lg"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400"
                   }`
                 }
               >
@@ -195,7 +195,7 @@ const Sidebar = ({ isOpen }) => {
       </nav>
 
       {/* Bottom Section */}
-      <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+      <div className="p-4 border-t border-blue-200/30 dark:border-blue-700/30">
         <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
           <p>VidFlow © 2025</p>
           <p>Made with ❤️</p>

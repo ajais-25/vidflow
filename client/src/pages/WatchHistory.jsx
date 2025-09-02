@@ -39,13 +39,13 @@ const WatchHistory = () => {
   // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {/* Header Skeleton */}
             <div className="mb-8">
-              <div className="h-8 bg-gray-300 dark:bg-gray-700 rounded-lg w-48 mb-4 animate-pulse"></div>
-              <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-96 animate-pulse"></div>
+              <div className="h-8 bg-blue-200 dark:bg-blue-800 rounded-lg w-48 mb-4 animate-pulse"></div>
+              <div className="h-4 bg-emerald-200 dark:bg-emerald-800 rounded w-96 animate-pulse"></div>
             </div>
 
             {/* Grid Skeleton */}
@@ -55,11 +55,11 @@ const WatchHistory = () => {
                   key={index}
                   className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm animate-pulse"
                 >
-                  <div className="aspect-video bg-gray-300 dark:bg-gray-700"></div>
+                  <div className="aspect-video bg-blue-200 dark:bg-blue-800"></div>
                   <div className="p-4 space-y-3">
-                    <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-full"></div>
-                    <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4"></div>
-                    <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div>
+                    <div className="h-4 bg-emerald-200 dark:bg-emerald-800 rounded w-full"></div>
+                    <div className="h-4 bg-blue-200 dark:bg-blue-800 rounded w-3/4"></div>
+                    <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
                   </div>
                 </div>
               ))}
@@ -71,7 +71,7 @@ const WatchHistory = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 transition-all duration-500">
       <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
@@ -79,7 +79,7 @@ const WatchHistory = () => {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
                 <div className="flex items-center space-x-3 mb-2">
-                  <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg shadow-lg">
+                  <div className="p-2 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg shadow-lg">
                     <svg
                       className="w-6 h-6 text-white"
                       fill="none"
@@ -94,11 +94,11 @@ const WatchHistory = () => {
                       />
                     </svg>
                   </div>
-                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
                     Watch History
                   </h1>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 text-lg">
+                <p className="text-gray-600 dark:text-gray-300 text-lg">
                   Keep track of videos you've watched recently
                 </p>
               </div>
@@ -173,10 +173,10 @@ const WatchHistory = () => {
           {/* Empty State */}
           {!error && watchHistory.length === 0 && (
             <div className="text-center py-16">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-12 max-w-md mx-auto">
-                <div className="p-4 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-blue-200 dark:border-blue-700 p-12 max-w-md mx-auto">
+                <div className="p-4 bg-gradient-to-br from-blue-100 to-emerald-100 dark:from-blue-900/20 dark:to-emerald-900/20 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
                   <svg
-                    className="w-10 h-10 text-gray-500 dark:text-gray-400"
+                    className="w-10 h-10 text-blue-500 dark:text-blue-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -192,13 +192,13 @@ const WatchHistory = () => {
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                   No Watch History Yet
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                   Start watching videos to build your history. Your recently
                   watched videos will appear here.
                 </p>
                 <button
                   onClick={() => (window.location.href = "/")}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-200 font-medium transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-emerald-600 hover:from-blue-600 hover:to-emerald-700 text-white rounded-lg transition-all duration-200 font-medium transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   Explore Videos
                 </button>
@@ -209,6 +209,17 @@ const WatchHistory = () => {
           {/* Videos Grid */}
           {!error && watchHistory.length > 0 && (
             <div className="space-y-6">
+              {/* Section Header */}
+              <div className="mb-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-emerald-500 rounded-full"></div>
+                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+                    Your Watch History
+                  </h2>
+                  <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-700"></div>
+                </div>
+              </div>
+
               {/* Grid Container */}
               <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1736px]:grid-cols-5 min-[2250px]:grid-cols-6 gap-6">
                 {watchHistory.map((video, index) => (

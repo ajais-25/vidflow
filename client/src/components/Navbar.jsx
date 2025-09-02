@@ -75,7 +75,7 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg dark:bg-gray-900/80 border-b border-gray-200/50 dark:border-gray-700/50"
+      className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-slate-50/90 to-blue-50/90 dark:from-gray-900/90 dark:to-gray-800/90 backdrop-blur-xl border-b border-blue-200/30 dark:border-blue-700/30"
       style={{ height: "4rem" }}
     >
       <div className="flex justify-between items-center h-full px-4 lg:px-6">
@@ -83,12 +83,12 @@ const Navbar = ({ toggleSidebar }) => {
         <div className="flex items-center space-x-4">
           {/* Menu Button */}
           <button
-            className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+            className="p-2 rounded-xl bg-blue-100/70 dark:bg-blue-900/30 hover:bg-blue-200/80 dark:hover:bg-blue-800/40 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md"
             onClick={toggleSidebar}
             aria-label="Toggle sidebar"
           >
             <svg
-              className="w-5 h-5 text-gray-700 dark:text-gray-300"
+              className="w-5 h-5 text-blue-700 dark:text-blue-300"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -104,7 +104,7 @@ const Navbar = ({ toggleSidebar }) => {
 
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200 shadow-md">
               <svg
                 className="w-5 h-5 text-white"
                 fill="none"
@@ -119,7 +119,7 @@ const Navbar = ({ toggleSidebar }) => {
                 />
               </svg>
             </div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
               VidFlow
             </h1>
           </Link>
@@ -135,11 +135,11 @@ const Navbar = ({ toggleSidebar }) => {
           {/* Profile Section */}
           <div className="relative" ref={profileRef}>
             <button
-              className="flex items-center space-x-2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+              className="flex items-center space-x-2 p-1 rounded-full hover:bg-blue-100/50 dark:hover:bg-blue-900/30 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
               onClick={handleProfileClick}
               aria-label="User menu"
             >
-              <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700">
+              <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-blue-200 dark:ring-blue-700 shadow-sm">
                 <img
                   className="w-full h-full object-cover"
                   src={
@@ -152,11 +152,11 @@ const Navbar = ({ toggleSidebar }) => {
 
             {/* Enhanced Dropdown */}
             {isProfileOpen && (
-              <div className="absolute right-0 mt-3 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden transform transition-all duration-200 scale-100">
+              <div className="absolute right-0 mt-3 w-72 bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-2xl shadow-xl border border-blue-200/30 dark:border-blue-700/30 overflow-hidden transform transition-all duration-200 scale-100">
                 {/* User Info Header */}
-                <div className="p-6 bg-gradient-to-r from-blue-500 to-purple-600">
+                <div className="p-6 bg-gradient-to-r from-blue-500 to-emerald-500">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 rounded-full overflow-hidden ring-3 ring-white/30">
+                    <div className="w-12 h-12 rounded-full overflow-hidden ring-3 ring-white/30 shadow-lg">
                       <img
                         className="w-full h-full object-cover"
                         src={
@@ -176,7 +176,7 @@ const Navbar = ({ toggleSidebar }) => {
                 </div>
 
                 {/* User Details */}
-                <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+                <div className="p-4 border-b border-blue-200/30 dark:border-blue-700/30">
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center justify-between">
                       <span className="text-gray-600 dark:text-gray-400">
@@ -201,7 +201,7 @@ const Navbar = ({ toggleSidebar }) => {
                 <div className="p-4 space-y-2">
                   <Link
                     to={`/c/${user?.username}`}
-                    className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200"
                     onClick={() => setIsProfileOpen(false)}
                   >
                     <svg
@@ -224,7 +224,7 @@ const Navbar = ({ toggleSidebar }) => {
 
                   <Link
                     to="/upload"
-                    className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-200"
                     onClick={() => setIsProfileOpen(false)}
                   >
                     <svg
@@ -247,7 +247,7 @@ const Navbar = ({ toggleSidebar }) => {
                 </div>
 
                 {/* Logout Button */}
-                <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="p-4 border-t border-blue-200/30 dark:border-blue-700/30">
                   <button
                     className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-200 font-medium"
                     onClick={handleLogout}
