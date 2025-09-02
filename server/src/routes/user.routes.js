@@ -9,6 +9,7 @@ import {
     registerUser,
     updateAccountDetails,
     updateUserAvatar,
+    clearWatchHistory,
 } from "../controllers/user.controller.js";
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
@@ -44,5 +45,6 @@ router
 
 router.route("/c/:username").get(verifyJWT, getUserChannelProfile);
 router.route("/history").get(verifyJWT, getWatchHistory);
+router.route("/history/clear").delete(verifyJWT, clearWatchHistory);
 
 export default router;

@@ -403,6 +403,25 @@ const getWatchHistory = async (req, res) => {
         );
 };
 
+const clearWatchHistory = async (req, res) => {
+    try {
+        await User.updateOne(
+            { _id: req.user._id },
+            { $set: { watchHistory: [] } }
+        );
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(200, null, "Watch history cleared successfully")
+            );
+    } catch (error) {
+        console.error(error);
+        return res
+            .status(500)
+            .json(new ApiResponse(500, null, "Failed to clear watch history"));
+    }
+};
+
 export {
     registerUser,
     loginUser,
@@ -414,4 +433,5 @@ export {
     updateUserAvatar,
     getUserChannelProfile,
     getWatchHistory,
+    clearWatchHistory,
 };
