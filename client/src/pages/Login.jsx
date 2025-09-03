@@ -29,7 +29,7 @@ const Login = () => {
         password,
       });
       // console.log(response.data.data);
-      dispatch(login({ user: response.data.data }));
+      dispatch(login({ user: response.data.data.user }));
       setEmail("");
       setPassword("");
       navigate("/");
@@ -50,7 +50,7 @@ const Login = () => {
         email: "dalesteyn@gmail.com",
         password: "1234",
       });
-      dispatch(login({ user: response.data.data }));
+      dispatch(login({ user: response.data.data.user }));
       navigate("/");
     } catch (error) {
       console.log(error);
