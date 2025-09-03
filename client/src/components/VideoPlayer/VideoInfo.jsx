@@ -21,20 +21,20 @@ const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
         to={`/c/${owner?.username}`}
         className="flex items-center group transition-all duration-300 hover:scale-105"
       >
-        <div className="w-12 h-12 rounded-full ring-2 ring-blue-100 dark:ring-blue-800 group-hover:ring-blue-200 dark:group-hover:ring-blue-700 transition-all duration-300 overflow-hidden">
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full ring-2 ring-blue-100 dark:ring-blue-800 group-hover:ring-blue-200 dark:group-hover:ring-blue-700 transition-all duration-300 overflow-hidden">
           <img
             src={owner?.avatar || ""}
             alt="Channel Avatar"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="ml-4">
-          <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+        <div className="ml-3 sm:ml-4">
+          <h3 className="text-base sm:text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 line-clamp-1">
             {owner?.fullName || "John Doe"}
           </h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
             <svg
-              className="w-4 h-4"
+              className="w-3 h-3 sm:w-4 sm:h-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -50,12 +50,12 @@ const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
           </p>
         </div>
       </Link>
-      <div className="flex justify-start sm:justify-end items-center">
+      <div className="flex justify-start sm:justify-end items-center mt-2 sm:mt-0">
         {
           // If the user is the owner of the video, don't show the subscribe button
           user?._id === owner?._id ? null : (
             <button
-              className={`group flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl ${
+              className={`group flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-sm sm:text-base ${
                 isSubscribed
                   ? "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-2 border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600"
                   : "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-2 border-transparent"
@@ -63,7 +63,7 @@ const VideoInfo = ({ owner, subscribers, isSubscribed, setIsSubscribed }) => {
               onClick={handleSubscribe}
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

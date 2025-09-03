@@ -65,19 +65,19 @@ const CommentSection = () => {
   }, []);
 
   return (
-    <div className="p-6">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-emerald-500 rounded-full"></div>
-        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+    <div className="p-3 sm:p-6">
+      <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+        <div className="w-1 h-6 sm:h-8 bg-gradient-to-b from-blue-500 to-emerald-500 rounded-full"></div>
+        <h2 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100">
           {comments?.length || 0} Comments
         </h2>
         <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-700"></div>
       </div>
 
       {/* Add Comment Input */}
-      <div className="mb-8 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800/50 dark:to-blue-900/20 rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50">
-        <div className="flex items-start gap-4 mb-4">
-          <div className="w-12 h-12 rounded-full ring-2 ring-blue-100 dark:ring-blue-800 overflow-hidden flex-shrink-0">
+      <div className="mb-6 sm:mb-8 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800/50 dark:to-blue-900/20 rounded-xl p-3 sm:p-4 border border-gray-200/50 dark:border-gray-700/50">
+        <div className="flex items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
+          <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full ring-2 ring-blue-100 dark:ring-blue-800 overflow-hidden flex-shrink-0">
             <img
               src={user?.avatar}
               alt="Your avatar"
@@ -90,7 +90,7 @@ const CommentSection = () => {
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Add a thoughtful comment..."
               rows={3}
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 resize-none"
+              className="w-full p-2 sm:p-3 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 resize-none"
             />
           </div>
         </div>
@@ -98,10 +98,10 @@ const CommentSection = () => {
           <button
             onClick={handleCommentSubmit}
             disabled={!newComment.trim()}
-            className="group flex items-center gap-2 bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 disabled:from-gray-400 disabled:to-gray-500 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+            className="group flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 disabled:from-gray-400 disabled:to-gray-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl text-sm sm:text-base font-medium transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
           >
             <svg
-              className="w-5 h-5"
+              className="w-4 h-4 sm:w-5 sm:h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -113,7 +113,8 @@ const CommentSection = () => {
                 d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
               />
             </svg>
-            Post Comment
+            <span className="hidden xs:inline">Post Comment</span>
+            <span className="xs:hidden">Post</span>
           </button>
         </div>
       </div>
@@ -133,15 +134,15 @@ const CommentSection = () => {
           </div>
         }
       >
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {comments && comments.length > 0
             ? comments.map((comment) => (
                 <div
                   key={comment._id}
-                  className="group bg-white/50 dark:bg-gray-800/30 backdrop-blur-sm rounded-xl p-4 border border-gray-200/30 dark:border-gray-700/30 hover:bg-white/80 dark:hover:bg-gray-800/50 hover:border-blue-200 dark:hover:border-blue-700 transition-all duration-300"
+                  className="group bg-white/50 dark:bg-gray-800/30 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-200/30 dark:border-gray-700/30 hover:bg-white/80 dark:hover:bg-gray-800/50 hover:border-blue-200 dark:hover:border-blue-700 transition-all duration-300"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full ring-2 ring-gray-200 dark:ring-gray-700 group-hover:ring-blue-200 dark:group-hover:ring-blue-700 overflow-hidden flex-shrink-0 transition-all duration-300">
+                  <div className="flex items-start gap-2 sm:gap-4">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full ring-2 ring-gray-200 dark:ring-gray-700 group-hover:ring-blue-200 dark:group-hover:ring-blue-700 overflow-hidden flex-shrink-0 transition-all duration-300">
                       <img
                         src={comment.owner.avatar}
                         alt={`${comment.owner.username}'s avatar`}
@@ -149,13 +150,13 @@ const CommentSection = () => {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <p className="font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                      <div className="flex flex-col xs:flex-row xs:items-center gap-1 xs:gap-2 mb-2">
+                        <p className="font-bold text-sm sm:text-base text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 truncate">
                           @{comment.owner.username}
                         </p>
-                        <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm">
+                        <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-xs sm:text-sm">
                           <svg
-                            className="w-4 h-4"
+                            className="w-3 h-3 sm:w-4 sm:h-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -170,7 +171,7 @@ const CommentSection = () => {
                           <span>{getTimeDifference(comment.createdAt)}</span>
                         </div>
                       </div>
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+                      <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap break-words">
                         {comment.content}
                       </p>
                     </div>

@@ -78,7 +78,7 @@ const Home = () => {
           </div>
 
           {/* Search Bar with enhanced styling */}
-          <div className="max-w-2xl mx-auto mb-8">
+          <div className="max-w-2xl mx-auto mb-8 px-4 sm:px-0">
             <SearchBar onSearchResults={handleSearchResults} />
           </div>
 
