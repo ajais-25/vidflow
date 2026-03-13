@@ -34,7 +34,7 @@ const VideoPage = () => {
       <div className="pt-16 sm:pt-20 pb-6 sm:pb-8 px-2 sm:px-4 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Main Video Section */}
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 overflow-hidden mb-3 sm:mb-6">
+          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 overflow-visible mb-3 sm:mb-6">
             <div className="video-container w-full">
               <VideoPlayer videoId={videoId} video={video} />
             </div>

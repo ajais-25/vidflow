@@ -197,7 +197,7 @@ const Sidebar = ({ isOpen }) => {
       {/* Bottom Section */}
       <div className="p-4 border-t border-blue-200/30 dark:border-blue-700/30">
         <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
-          <p>VidFlow © 2025</p>
+          <p>VidFlow © {new Date().getFullYear()}</p>
           <p>Made with ❤️</p>
         </div>
       </div>

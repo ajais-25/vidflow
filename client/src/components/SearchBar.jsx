@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { API } from "../api";
 
@@ -7,33 +7,35 @@ const SearchBar = ({ onSearchResults }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [resultsCache, setResultsCache] = useState({});
 
-  const memoizedResults = useMemo(
-    () => resultsCache[query],
-    [query, resultsCache]
-  );
-
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (!query.trim()) return;
+    const normalizedQuery = query.trim().toLowerCase();
 
-    if (memoizedResults) {
-      onSearchResults(memoizedResults);
+    if (!normalizedQuery) return;
+
+    if (Object.prototype.hasOwnProperty.call(resultsCache, normalizedQuery)) {
+      onSearchResults(resultsCache[normalizedQuery]);
       return;
     }
 
-    console.log("Searching for videos...");
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${API}/videos/search?query=${encodeURIComponent(query)}`
+        `${API}/videos/search?query=${encodeURIComponent(normalizedQuery)}`,
       );
+
+      const videos = Array.isArray(response?.data?.data)
+        ? response.data.data
+        : [];
+
       setResultsCache((prevCache) => ({
         ...prevCache,
-        [query]: response.data.data,
+        [normalizedQuery]: videos,
       }));
-      onSearchResults(response.data.data);
+      onSearchResults(videos);
     } catch (error) {
       console.error("Error searching videos:", error);
+      onSearchResults([]);
     } finally {
       setIsLoading(false);
     }
